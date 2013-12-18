@@ -28,7 +28,7 @@ object in the database.
 class APIRequestTestCase(TestCase):
     user_factory = factories.UserFactory
 
-    def create_request(self, method='get', *, url='/', user=None, auth=True, **kwargs):
+    def create_request(self, method='get', url='/', user=None, auth=True, **kwargs):
         if not user:
             if auth:
                 user = self.user_factory.create()
