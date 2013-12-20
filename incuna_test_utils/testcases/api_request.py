@@ -2,11 +2,11 @@ from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase
 from rest_framework.test import APIRequestFactory, force_authenticate
 
-from . import factories
+from .factories.user import UserFactory
 
 
 class APIRequestTestCase(TestCase):
-    user_factory = factories.UserFactory
+    user_factory = UserFactory
 
     def create_request(self, method='get', url='/', user=None, auth=True, **kwargs):
         if not user:
