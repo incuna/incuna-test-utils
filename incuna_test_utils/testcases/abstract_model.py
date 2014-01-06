@@ -1,5 +1,4 @@
 from django.db.models.base import ModelBase
-from django.db.models.loading import cache
 
 
 class AbstractModelMixin(object):
@@ -20,8 +19,3 @@ class AbstractModelMixin(object):
             (self.mixin,),
             {'__module__': self.mixin.__module__},
         )
-
-    def tearDown(self):
-        # Ensure we don't leave our test model in the model cache
-        articles = cache.app_models['articles']
-        del articles[self._model_name.lower()]
