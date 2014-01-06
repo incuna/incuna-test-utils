@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v0.2.1
+------
+* Remove app-specific tearDown logic from AbstractModelMixin
+
 v0.2.0
 ------
 * Add PageFactory for FeinCMS
