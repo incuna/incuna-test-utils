@@ -1,9 +1,15 @@
 Changelog for incuna-test-utils
 ============================
 
+v0.3
+------
+* Add RequestTestCase.
+
+
 v0.2.1
 ------
 * Remove app-specific tearDown logic from AbstractModelMixin
+
 
 v0.2.0
 ------
@@ -12,6 +18,7 @@ v0.2.0
 v0.1.2
 ------
 * Convert AbstractModelTestCase to mixin.
+
 
 v0.1.1
 ------
@@ -26,3 +33,4 @@ Add:
 * APITestCase
 * AbstractModelTestCase
 * UserFactory
+
