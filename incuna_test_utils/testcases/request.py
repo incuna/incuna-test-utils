@@ -13,6 +13,8 @@ class RequestTestCase(TestCase):
             user = self.create_user(auth=auth)
         request = getattr(self.request_factory(), method)(url, **kwargs)
         request.user = user
+        if 'data' in kwargs:
+            request.DATA = kwargs['data']
         return request
 
     def create_user(self, auth=True, **kwargs):

@@ -1,9 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
-v0.2.2
+v0.3
 ------
 * Add RequestTestCase.
+
 
 v0.2.1
 ------
@@ -32,3 +33,4 @@ Add:
 * APITestCase
 * AbstractModelTestCase
 * UserFactory
+

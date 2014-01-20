@@ -16,6 +16,4 @@ class APIRequestTestCase(RequestTestCase):
             **kwargs)
         if auth:
             force_authenticate(request, request.user)
-        if 'data' in kwargs:
-            request.DATA = kwargs['data']
         return request
