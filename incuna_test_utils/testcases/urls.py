@@ -2,19 +2,24 @@ from django.core.urlresolvers import resolve, reverse
 from django.test import TestCase
 
 
-class URLsTestCase(TestCase):
-    """A TestCase with a check_url helper method for testing urls"""
+class URLsMixin(object):
+    """A TestCase Mixin with a check_url helper method for testing urls"""
 
-    def check_url(self, view_class, url, url_name, url_args=None, url_kwargs=None):
+    def check_url(self, view_class, expected_url, url_name,
+                  url_args=None, url_kwargs=None):
         """
         Assert a view's url is correctly configured
 
-        Check the url_name reverses to give a correctly formated url.
-        Check the url resolves to the correct view.
+        Check the url_name reverses to give a correctly formated expected_url.
+        Check the expected_url resolves to the correct view.
         """
 
         reversed_url = reverse(url_name, args=url_args, kwargs=url_kwargs)
-        self.assertEqual(reversed_url, url)
+        self.assertEqual(reversed_url, expected_url)
 
-        resolved_view_class = resolve(url).func.cls
+        resolved_view_class = resolve(expected_url).func.cls
         self.assertEqual(resolved_view_class, view_class)
+
+
+class URLsTestCase(URLsMixin, TestCase):
+    pass
