@@ -1,6 +1,11 @@
 Changelog for incuna-test-utils
 ============================
 
+v0.4
+------
+* Add URLsMixin and URLsTestCase
+* Support wheel
+
 v0.3
 ------
 * Add RequestTestCase.
