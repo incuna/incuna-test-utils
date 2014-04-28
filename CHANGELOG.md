@@ -1,6 +1,11 @@
 Changelog for incuna-test-utils
 ============================
 
+v0.5
+------
+* Refine URLsMixin into two classes, URLsMixinForViewMethod and URLsMixinREST
+* Deprecate URLsMixin
+
 v0.4
 ------
 * Add URLsMixin and URLsTestCase
