@@ -1,3 +1,5 @@
+import warnings
+
 from django.core.urlresolvers import resolve, reverse
 from django.test import TestCase
 
@@ -24,7 +26,7 @@ class URLsMixinBase(object):
         Assert that the view method/class that the URL resolves to is the
         correct one.
         """
-        pass
+        raise NotImplementedError
 
 
 class URLsMixinForViewMethod(URLsMixinBase):
@@ -45,7 +47,9 @@ class URLsMixinREST(URLsMixinBase):
 
 class URLsMixin(URLsMixinREST):
     """For backwards compatibility."""
-    pass
+    warnings.warn(
+        'URLsMixin is deprecated; use URLsMixinREST instead.',
+        DeprecationWarning)
 
 
 class URLsTestCase(URLsMixinREST, TestCase):
