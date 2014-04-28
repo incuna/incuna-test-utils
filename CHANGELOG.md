@@ -2,6 +2,7 @@ Changelog for incuna-test-utils
 ============================
 
 v0.6
+------
 * Add URLsTestCaseREST and URLsTestCaseViewMethod for cleanliness and ease of use
 * Deprecate URLsTestCase
 
