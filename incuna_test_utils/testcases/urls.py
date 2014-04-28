@@ -47,10 +47,20 @@ class URLsMixinREST(URLsMixinBase):
 
 class URLsMixin(URLsMixinREST):
     """For backwards compatibility."""
-    warnings.warn(
-        'URLsMixin is deprecated; use URLsMixinREST instead.',
-        DeprecationWarning)
+    def __init__(self, *args, **kwargs):
+        warnings.warn(
+            'URLsMixin is deprecated; use URLsMixinREST instead.',
+            DeprecationWarning)
+        super(URLsMixin, self).__init__(*args, **kwargs)
 
 
-class URLsTestCase(URLsMixinREST, TestCase):
-    pass
+class URLsTestCase(URLsMixin, TestCase):
+    """For backwards compatibility.  Deprecated in v0.6."""
+
+
+class URLsTestCaseREST(URLsMixinREST, TestCase):
+    """Tests class-based REST Framework views."""
+
+
+class URLsTestCaseViewMethod(URLsMixinForViewMethod, TestCase):
+    """Tests (non-REST) views defined by view methods."""
