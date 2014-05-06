@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v0.7.0
+------
+* Add Python2CountEqualMixin to enable use of assertCountEqual in python 2
+
 v0.6
 ------
 * Add URLsTestCaseREST and URLsTestCaseViewMethod for cleanliness and ease of use
