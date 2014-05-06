@@ -4,63 +4,26 @@ from django.core.urlresolvers import resolve, reverse
 from django.test import TestCase
 
 
-class URLsMixinBase(object):
-    """A TestCase Mixin with a check_url helper method for testing urls"""
-
-    def check_url(self, view, expected_url, url_name,
-                  url_args=None, url_kwargs=None):
+class URLTestMixin(object):
+    def assert_url_matches_view(self, view, expected_url, url_name,
+                                url_args=None, url_kwargs=None):
         """
         Assert a view's url is correctly configured
 
         Check the url_name reverses to give a correctly formated expected_url.
-        Check the expected_url resolves to the correct view.
+        Check the expected_url resolves to the expected view.
         """
 
         reversed_url = reverse(url_name, args=url_args, kwargs=url_kwargs)
         self.assertEqual(reversed_url, expected_url)
 
-        self.assertViewNames(view, expected_url)
+        resolved_view = resolve(expected_url).func
 
-    def assertViewNames(self, view, expected_url):
-        """
-        Assert that the view method/class that the URL resolves to is the
-        correct one.
-        """
-        raise NotImplementedError
+        if hasattr(view, 'cls'):
+            self.assertEqual(resolved_view.cls, view)
+        else:
+            self.assertEqual(resolved_view.__name__, view.__name__)
 
 
-class URLsMixinForViewMethod(URLsMixinBase):
-    """For testing method-based views."""
-
-    def assertViewNames(self, view_method, expected_url):
-        resolved_view_method = resolve(expected_url).func
-        self.assertEqual(resolved_view_method.__name__, view_method.__name__)
-
-
-class URLsMixinREST(URLsMixinBase):
-    """For testing class-based views."""
-
-    def assertViewNames(self, view_class, expected_url):
-        resolved_view_class = resolve(expected_url).func.cls
-        self.assertEqual(resolved_view_class, view_class)
-
-
-class URLsMixin(URLsMixinREST):
-    """For backwards compatibility."""
-    def __init__(self, *args, **kwargs):
-        warnings.warn(
-            'URLsMixin is deprecated; use URLsMixinREST instead.',
-            DeprecationWarning)
-        super(URLsMixin, self).__init__(*args, **kwargs)
-
-
-class URLsTestCase(URLsMixin, TestCase):
-    """For backwards compatibility.  Deprecated in v0.6."""
-
-
-class URLsTestCaseREST(URLsMixinREST, TestCase):
-    """Tests class-based REST Framework views."""
-
-
-class URLsTestCaseViewMethod(URLsMixinForViewMethod, TestCase):
-    """Tests (non-REST) views defined by view methods."""
+class URLTestCase(URLTestMixin, TestCase):
+    pass
