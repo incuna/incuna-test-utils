@@ -1,6 +1,13 @@
 Changelog for incuna-test-utils
 ============================
 
+v1.0.0
+------
+* Simplify testcases.urls
+    * Add URLTestMixin with assert_url_matches_view method
+    * Remove URLsTestCaseREST, URLsTestCaseViewMethod and URLsTestCase
+    * Remove URLsMixinREST, URLsMixinForViewMethod, URLsMixin and URLsMixinBase
+
 v0.7.0
 ------
 * Add Python2CountEqualMixin to enable use of assertCountEqual in python 2
