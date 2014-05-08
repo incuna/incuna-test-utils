@@ -1,6 +1,13 @@
 Changelog for incuna-test-utils
 ============================
 
+v1.1.0
+* Remove AbstractModelMixin
+    * AbstractModelMixin creates multiple versions of the same model class. This
+      confuses the django 1.7 App loader.
+    * Use a concrete subclass of your abstract model in your test directory
+      instead.
+
 v1.0.0
 ------
 * Simplify testcases.urls
