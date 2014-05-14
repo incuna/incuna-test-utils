@@ -1,6 +1,12 @@
 Changelog for incuna-test-utils
 ============================
 
+v1.1.1
+------
+
+* Fix URLTestCase
+    * Check for cls attribute on resolved_view, not view
+
 v1.1.0
 ------
 * Remove AbstractModelMixin

@@ -19,7 +19,7 @@ class URLTestMixin(object):
 
         resolved_view = resolve(expected_url).func
 
-        if hasattr(view, 'cls'):
+        if hasattr(resolved_view, 'cls'):
             self.assertEqual(resolved_view.cls, view)
         else:
             self.assertEqual(resolved_view.__name__, view.__name__)
