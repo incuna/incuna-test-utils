@@ -1,7 +1,14 @@
 Changelog for incuna-test-utils
 ============================
 
+v1.1.1
+------
+
+* Fix URLTestCase
+    * Check for cls attribute on resolved_view, not view
+
 v1.1.0
+------
 * Remove AbstractModelMixin
     * AbstractModelMixin creates multiple versions of the same model class. This
       confuses the django 1.7 App loader.
