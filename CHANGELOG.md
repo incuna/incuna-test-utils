@@ -1,6 +1,14 @@
 Changelog for incuna-test-utils
 ============================
 
+v2.0.0
+------
+
+* Add `compat` module.
+* Add `compat.DJANGO_LT_17`.
+* Add `compat.wipe_id_fields_on_django_lt_17`.
+* Move the Python2CountEqualMixin from `testcases.compat` to `compat`.
+
 v1.1.1
 ------
 
