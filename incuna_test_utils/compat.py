@@ -14,3 +14,11 @@ def wipe_id_fields_on_django_lt_17(fields):
     if DJANGO_LT_17:
         return filter(lambda n: not n.endswith('_id'), fields)
     return fields
+
+
+class Python2CountEqualMixin(object):
+    """Add assertCountEqual to python 2 TestCase"""
+    def __init__(self, *args, **kwargs):
+        super(Python2CountEqualMixin, self).__init__(*args, **kwargs)
+        if not hasattr(self, 'assertCountEqual'):
+            self.assertCountEqual = self.assertItemsEqual
