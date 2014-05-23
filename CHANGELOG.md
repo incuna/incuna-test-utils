@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v2.0.1
+------
+* Add `compat.DJANGO_LT_15` and `compat.DJANGO_LT_16`.
+
 v2.0.0
 ------
 
