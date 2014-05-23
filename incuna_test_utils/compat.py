@@ -1,6 +1,8 @@
 import django
 
 
+DJANGO_LT_15 = django.VERSION < (1, 5)
+DJANGO_LT_16 = django.VERSION < (1, 6)
 DJANGO_LT_17 = django.VERSION < (1, 7)
 
 
