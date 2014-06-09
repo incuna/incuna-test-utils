@@ -4,7 +4,7 @@ from django.test import TestCase
 
 class URLTestMixin(object):
     def assert_url_matches_view(self, view, expected_url, url_name,
-                                urlconf=None, url_args=None, url_kwargs=None):
+                                url_args=None, url_kwargs=None, urlconf=None):
         """
         Assert a view's url is correctly configured
 
