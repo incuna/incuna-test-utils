@@ -5,7 +5,7 @@ setup(
     name='incuna-test-utils',
     packages=find_packages(),
     include_package_data=True,
-    version='2.0.1',
+    version='2.1.0',
     description='',
     long_description=open('README.rst').read(),
     author='Incuna',

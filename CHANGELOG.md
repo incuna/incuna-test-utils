@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v2.1.0
+--------
+* Add ability to override urlconf when using `assert_url_matches_view`
+
 v2.0.1
 ------
 * Add `compat.DJANGO_LT_15` and `compat.DJANGO_LT_16`.
