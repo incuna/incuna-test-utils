@@ -1,5 +1,3 @@
-import warnings
-
 from django.core.urlresolvers import resolve, reverse
 from django.test import TestCase
 
