@@ -1,7 +1,7 @@
 Changelog for incuna-test-utils
 ============================
 
-Upcoming Release
+v3.0.0
 ------
 * Replace `UserFactory` with `BaseUserFactory`.
 * Remove `FACTORY_FOR` from `BaseUserFactory`.
