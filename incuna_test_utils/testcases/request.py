@@ -1,11 +1,14 @@
 from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase, RequestFactory
 
-from ..factories.user import UserFactory
 
+class BaseRequestTestCase(TestCase):
+    """
+    Extend django.test.TestCase with a create_request method.
 
-class RequestTestCase(TestCase):
-    user_factory = UserFactory
+    BaseRequestTestCase must be subclassed with a user_factory attribute to
+    create a default user for the request.
+    """
     request_factory = RequestFactory
 
     def create_request(self, method='get', url='/', user=None, auth=True, **kwargs):
