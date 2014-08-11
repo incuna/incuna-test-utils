@@ -1,11 +1,8 @@
 from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase, RequestFactory
 
-from ..factories.user import UserFactory
-
 
 class RequestTestCase(TestCase):
-    user_factory = UserFactory
     request_factory = RequestFactory
 
     def create_request(self, method='get', url='/', user=None, auth=True, **kwargs):
