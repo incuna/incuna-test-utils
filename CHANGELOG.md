@@ -3,12 +3,15 @@ Changelog for incuna-test-utils
 
 Upcoming Release
 ------
-* Remove UserFactory
-* RequestTestCase requires an explicit `user_factory` to be set when subclassing
+* Replace `UserFactory` with `BaseUserFactory`.
+* Remove `FACTORY_FOR` from `BaseUserFactory`.
+* Replace `RequestTestCase` with `BaseRequestTestCase`.
+* `BaseRequestTestCase` requires an explicit `user_factory` to be set when
+  subclassing.
 
 v2.1.0
 ------
-* Add ability to override urlconf when using `assert_url_matches_view`
+* Add ability to override urlconf when using `assert_url_matches_view`.
 
 v2.0.1
 ------
