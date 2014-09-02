@@ -19,13 +19,14 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     HTML.  Can be used to assert the contents of templates as well as doing
     normal TestCase things.
 
-    Must be subclassed with a user_factory attribute in order to work.
+    Must be subclassed with the following attributes in order to work:
+    * user_factory
+    * view_class
     """
-    def access_view(self, request, **kwargs):
+    def access_view(self, request, *args, **kwargs):
         """Helper method that accesses the view."""
         view = self.view_class.as_view()
-        response = view(request, **kwargs)
-        return response
+        return view(request, *args, **kwargs)
 
     def render_to_str(self, request, response):
         """Render a HTTPResponse into a string that holds the HTML content."""
