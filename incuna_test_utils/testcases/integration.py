@@ -33,7 +33,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         response = render(request, response.template_name, response.context_data)
         return str(response.content)
 
-    def access_assert_and_render(self, as_user, expected_status=200, **kwargs):
+    def access_assert_and_render(self, as_user, expected_status=200, *view_args, **view_kwargs):
         """
         Accesses the view as the named user and returns a string of HTML.
 
@@ -42,7 +42,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         """
         request = self.create_request(user=as_user)
         request._messages = DummyStorage()
-        response = self.access_view(request, **kwargs)
+        response = self.access_view(request, *view_args, **view_kwargs)
         self.assertEqual(expected_status, response.status_code)
         return self.render_to_str(request, response)
 
