@@ -56,14 +56,17 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         Outputs a decently verbose error message when it fails.
         """
         actual_count = haystack.count(needle)
-        self.assertEqual(
-            count,
-            actual_count,
-            'Expected {count} instance{plural} of {needle}, but found {actual_count}, in {haystack}'.format(
-                count=count,
-                plural=('' if count==1 else 's'),
-                needle=needle,
-                actual_count=actual_count,
-                haystack=haystack,
-            )
+
+        # Build a verbose error message in case we need it.
+        plural = '' if count == 1 else 's'
+        message = 'Expected {count} instance{plural} of {needle}, but found {actual_count}, in {haystack}'
+        message = message.format(
+            count=count,
+            plural=plural,
+            needle=needle,
+            actual_count=actual_count,
+            haystack=haystack,
         )
+
+        # Make the assertion.
+        self.assertEqual(count, actual_count, message)
