@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v3.1.0
+------
+* Add `IntegrationTestCase` for testing rendered HTML pages.
+
 v3.0.0
 ------
 * Replace `UserFactory` with `BaseUserFactory`.
