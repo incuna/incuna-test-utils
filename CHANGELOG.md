@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v3.1.1
+------
+* Fix bug with DummyStorage object not being iterable when calling render().
+
 v3.1.0
 ------
 * Add `IntegrationTestCase` for testing rendered HTML pages.

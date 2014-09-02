@@ -10,6 +10,10 @@ class DummyStorage:
     def add(self, level, message, extra_tags=''):
         self.store.add(message)
 
+    def __iter__(self):
+        for item in self.store:
+            yield item
+
 
 class BaseIntegrationTestCase(BaseRequestTestCase):
     """
