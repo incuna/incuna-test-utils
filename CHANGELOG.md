@@ -1,7 +1,7 @@
 Changelog for incuna-test-utils
 ============================
 
-Upcoming v3.1.0
+v3.1.0
 ------
 * Add `IntegrationTestCase` for testing rendered HTML pages.
 * Replace `APIRequestTestCase` with `BaseRequestTestCase`.  Technically
