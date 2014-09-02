@@ -1,7 +1,7 @@
 Changelog for incuna-test-utils
 ============================
 
-v3.1.0
+Upcoming v3.1.0
 ------
 * Add `IntegrationTestCase` for testing rendered HTML pages.
 
