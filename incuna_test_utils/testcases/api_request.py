@@ -4,6 +4,11 @@ from .request import BaseRequestTestCase
 
 
 class BaseAPIRequestTestCase(BaseRequestTestCase):
+    """
+    Extend BaseRequestTestCase with REST framework compatibility.
+
+    Must be subclassed with an user_factory attribute in order to work.
+    """
     request_factory = APIRequestFactory
 
     def create_request(self, method='get', url='/', user=None, auth=True, **kwargs):
