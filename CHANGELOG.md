@@ -1,6 +1,11 @@
 Changelog for incuna-test-utils
 ============================
 
+v3.1.0
+------
+* Replace `APIRequestTestCase` with `BaseRequestTestCase`.  Technically
+  backwards-incompatible, but is essentially a bugfix from v3.0.0.
+
 v3.0.0
 ------
 * Replace `UserFactory` with `BaseUserFactory`.
