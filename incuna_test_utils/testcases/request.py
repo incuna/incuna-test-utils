@@ -32,10 +32,7 @@ class BaseRequestTestCase(TestCase):
         if 'data' in kwargs:
             request.DATA = kwargs['data']
 
-        if 'messages' in kwargs:
-            request._messages = kwargs['messages']
-        else:
-            request._messages = DummyStorage()
+        request._messages = DummyStorage()
 
         return request
 
