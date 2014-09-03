@@ -18,24 +18,8 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
 
     A function-based view must be provided wrapped in `staticmethod`:
         view = staticmethod(view_func)
+    See superclass (BaseRequestTestCase) for more detail.
     """
-    def get_view_callable(self):
-        """
-        Returns the class's attached view, as a callable.
-
-        Checks self.view exists, and throws an ImproperlyConfigured exception
-        if it doesn't.  Otherwise, it returns the view, ensuring it's callable.
-        """
-        try:
-            view = self.view
-        except AttributeError:
-            message = "This test must have a 'view' attribute."
-            raise ImproperlyConfigured(message)
-        
-        try:
-            return view.as_view()
-        except AttributeError:
-            return view
 
     def access_view(self, *args, **kwargs):
         """
@@ -51,7 +35,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         if request is None:
             request = self.create_request(add_session=True)
 
-        view_callable = self.get_view_callable()
+        view_callable = self.get_view()
         response = view_callable(request, *args, **kwargs)
 
         # Add the request to the response.

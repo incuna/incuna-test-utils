@@ -21,8 +21,34 @@ class BaseRequestTestCase(TestCase):
 
     BaseRequestTestCase must be subclassed with a user_factory attribute to
     create a default user for the request.
+
+    A class- or function-based view can be attached to the test class as the
+    'view' attribute.  get_view() returns a callable version of that
+    view, abstracting over whether it's class- or function-based.  However,
+    due to a quirk of Python's way of attaching things to classes, any
+    function-based view must currently be added wrapped in `staticmethod()`:
+        view = view_class                   # class-based view
+        view = staticmethod(view_func)      # function-based view
     """
     request_factory = RequestFactory 
+
+    def get_view(self):
+        """
+        Returns the class's attached view, as a callable.
+
+        Checks self.view exists, and throws an ImproperlyConfigured exception
+        if it doesn't.  Otherwise, it returns the view, ensuring it's callable.
+        """
+        try:
+            view = self.view
+        except AttributeError:
+            message = "This test must have a 'view' attribute."
+            raise ImproperlyConfigured(message)
+        
+        try:
+            return view.as_view()
+        except AttributeError:
+            return view
 
     @staticmethod
     def add_session_to_request(request):
