@@ -13,7 +13,7 @@ class BaseAPIRequestTestCase(BaseRequestTestCase):
 
     def create_request(self, method='get', url='/', user=None, auth=True, **kwargs):
         kwargs['format'] = 'json'
-        request = super(APIRequestTestCase, self).create_request(
+        request = super(BaseAPIRequestTestCase, self).create_request(
             method=method,
             url=url,
             user=user,

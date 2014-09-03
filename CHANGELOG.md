@@ -1,6 +1,18 @@
 Changelog for incuna-test-utils
 ============================
 
+v3.2.0
+------
+* Add ability to handle function-based views to BaseRequestTestCase.
+* Add ability to augment requests with sessions to BaseRequestTestCase.
+* Use both in IntegrationTestCase.
+* Reflow IntegrationTestCase's methods for clarity and flexibility.
+* Fix various bugs along the way.
+
+v3.1.2
+------
+* Fix `super` call in `BaseAPIRequestTestCase`
+
 v3.1.1
 ------
 * Fix bug with DummyStorage object not being iterable when calling render().
