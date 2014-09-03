@@ -14,26 +14,25 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
 
     Must be subclassed with the following attributes in order to work:
     * user_factory
-    * view_class (class-based view) or view (function-based view)
+    * view (class-based or function-based view)
     """
     def get_view(self):
         """
-        Returns the class's attached view.
+        Returns the class's attached view, as a method.
 
-        Checks self.view_class, then self.view.  Throws an ImproperlyConfigured
-        exception if neither exist.
+        Checks self.view exists, and throws an ImproperlyConfigured exception
+        if it doesn't.  Otherwise, it returns the view as a method.
         """
         try:
-            return self.view_class.as_view()
-        except AttributeError:
-            # Continue on to the next try/catch
-            pass
-        
-        try:
-            return self.view
+            view = self.view
         except AttributeError:
             message = "This test must have a 'view_class' or 'view' attribute."
             raise ImproperlyConfigured(message)
+        
+        try:
+            return self.view.as_view()
+        except AttributeError:
+            return self.view
 
     def access_view(self, request=None, *args, **kwargs):
         """
