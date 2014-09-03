@@ -16,12 +16,12 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     * user_factory
     * view (class-based or function-based view)
     """
-    def get_view_method(self):
+    def get_view_callable(self):
         """
-        Returns the class's attached view, as a method.
+        Returns the class's attached view, as a callable.
 
         Checks self.view exists, and throws an ImproperlyConfigured exception
-        if it doesn't.  Otherwise, it returns the view as a method.
+        if it doesn't.  Otherwise, it returns the view, ensuring it's callable.
         """
         try:
             view = self.view
@@ -48,8 +48,8 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         if request is None:
             request = self.create_request()
 
-        view_method = self.get_view_method()
-        response = view_method(request, *args, **kwargs)
+        view_callable = self.get_view_callable()
+        response = view_callable(request, *args, **kwargs)
 
         # Add the request to the response.
         # This is a weird-looking but compact way of ensuring we have access to
