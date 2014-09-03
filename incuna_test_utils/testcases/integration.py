@@ -14,7 +14,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
 
     Must be subclassed with the following attributes in order to work:
     * user_factory
-    * view_class (class-based view) or view (method-based view)
+    * view_class (class-based view) or view (function-based view)
     """
     def get_view(self):
         """
