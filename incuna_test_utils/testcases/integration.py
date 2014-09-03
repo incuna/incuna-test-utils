@@ -82,7 +82,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         parameter isn't supplied), an expected status code for the response
         (which defaults to 200), and args and kwargs for the view method.
         """
-        response = self.access_view(*view_args, request=request, **view_kwargs)
+        response = self.access_view(request, *view_args, **view_kwargs)
 
         # Assert that the response has the correct status code before we go
         # any further.  Throwing accurately descriptive failures when something
