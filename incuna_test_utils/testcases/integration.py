@@ -15,6 +15,9 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     Must be subclassed with the following attributes in order to work:
     * user_factory
     * view (class-based or function-based view)
+
+    A function-based view must be provided wrapped in `staticmethod`:
+        view = staticmethod(view_func)
     """
     def get_view_callable(self):
         """
@@ -87,7 +90,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         request = kwargs.pop('request', None)
         expected_status = kwargs.pop('expected_status', 200)
 
-        response = self.access_view(request, *args, **kwargs)
+        response = self.access_view(*args, request=request, **kwargs)
 
         # Assert that the response has the correct status code before we go
         # any further.  Throwing accurately descriptive failures when something
