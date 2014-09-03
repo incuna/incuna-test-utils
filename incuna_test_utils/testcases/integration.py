@@ -49,7 +49,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         """
         request = kwargs.pop('request', None)
         if request is None:
-            request = self.create_request()
+            request = self.create_request(add_session=True)
 
         view_callable = self.get_view_callable()
         response = view_callable(request, *args, **kwargs)

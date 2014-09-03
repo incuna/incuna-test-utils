@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.sessions.middleware import SessionMiddleware
 from django.test import TestCase, RequestFactory
 
 
@@ -21,9 +22,16 @@ class BaseRequestTestCase(TestCase):
     BaseRequestTestCase must be subclassed with a user_factory attribute to
     create a default user for the request.
     """
-    request_factory = RequestFactory
+    request_factory = RequestFactory 
 
-    def create_request(self, method='get', url='/', user=None, auth=True, **kwargs):
+    @staticmethod
+    def add_session_to_request(request):
+        """Annotate a request object with a session."""
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+        request.session.save()
+
+    def create_request(self, method='get', url='/', user=None, auth=True, add_session=False, **kwargs):
         if user is None:
             user = self.create_user(auth=auth)
         request = getattr(self.request_factory(), method)(url, **kwargs)
@@ -33,6 +41,9 @@ class BaseRequestTestCase(TestCase):
             request.DATA = kwargs['data']
 
         request._messages = DummyStorage()
+
+        if add_session:
+            self.add_session_to_request(request)
 
         return request
 
