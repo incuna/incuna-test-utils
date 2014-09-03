@@ -1,3 +1,4 @@
+from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
 
 from .request import BaseRequestTestCase
@@ -13,39 +14,83 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
 
     Must be subclassed with the following attributes in order to work:
     * user_factory
-    * view_class
+    * view_class (class-based view) or view (method-based view)
     """
-    def access_view(self, request, *args, **kwargs):
-        """Helper method that accesses the view."""
-        view = self.view_class.as_view()
-        return view(request, *args, **kwargs)
+    def get_view(self):
+        """
+        Returns the class's attached view.
 
-    def render_to_str(self, request, response):
-        """Render a HTTPResponse into a string that holds the HTML content."""
+        Checks self.view_class, then self.view.  Throws an ImproperlyConfigured
+        exception if neither exist.
+        """
+        try:
+            return self.view_class.as_view()
+        except AttributeError:
+            # Continue on to the next try/catch
+            pass
+        
+        try:
+            return self.view
+        except AttributeError:
+            message = "This test must have a 'view_class' or 'view' attribute."
+            raise ImproperlyConfigured(message)
+
+    def access_view(self, *args, request=None, **kwargs):
+        """
+        Helper method that accesses the test's view.
+
+        Accepts a request parameter, which can be None.  If it is, this method
+        creates a basic request on your behalf.
+
+        Returns a HTTPResponse object with the request (created or otherwise)
+        attached.
+        """
+        if request is None:
+            request = self.create_request()
+            request._messages = DummyStorage()
+
+        view = self.get_view()
+        response = view(request, *args, **kwargs)
+
+        # Add the request to the response.
+        # This is a weird-looking but compact way of ensuring we have access to
+        # the request everywhere we need it, without doing clunky things like
+        # returning tuples all the time.
+        response.request = request
+        return response
+
+    def render_to_str(self, response, request=None):
+        """
+        Render a HTTPResponse into a string that holds the HTML content.
+        """
+        if response.request:
+            # Use the response's attached request if we have it.
+            request = response.request
+
         response = render(request, response.template_name, response.context_data)
         return str(response.content)
 
-    def access_assert_and_render(self, as_user, *view_args, expected_status=200, **view_kwargs):
+    def access_view_and_render_response(self, *view_args, request=None, expected_status=200, **view_kwargs):
         """
-        Accesses the view as the named user and returns a string of HTML.
+        Accesses the view and returns a string of HTML.
 
         Combines access_view, an assertion on the returned status, and
-        render_to_str.  Also creates a request for you.
-        """
-        request = self.create_request(user=as_user)
-        request._messages = DummyStorage()
-        response = self.access_view(request, *view_args, **view_kwargs)
-        self.assertEqual(expected_status, response.status_code)
-        return self.render_to_str(request, response)
+        render_to_str.
 
-    def assert_count(self, needle, haystack, count=1):
+        Accepts an optional request (but will create a simple one if the
+        parameter isn't supplied), an expected status code for the response
+        (which defaults to 200), and args and kwargs for the view method.
+        """
+        response = self.access_view(*view_args, request=request, **view_kwargs)
+        self.assertEqual(expected_status, response.status_code)
+        return self.render_to_str(response)
+
+    def assert_count(self, needle, haystack, count):
         """
         Assert that 'needle' occurs exactly 'count' times in 'haystack'.
 
         Used as a snazzier, stricter version of unittest.assertIn.
-        The 'count' parameter defaults to 1.
-
-        Outputs a decently verbose error message when it fails.
+        Outputs a verbose error message when it fails.
         """
         actual_count = haystack.count(needle)
 
