@@ -16,7 +16,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     * user_factory
     * view (class-based or function-based view)
     """
-    def get_view(self):
+    def get_view_method(self):
         """
         Returns the class's attached view, as a method.
 
@@ -48,8 +48,8 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         if request is None:
             request = self.create_request()
 
-        view = self.get_view()
-        response = view(request, *args, **kwargs)
+        view_method = self.get_view_method()
+        response = view_method(request, *args, **kwargs)
 
         # Add the request to the response.
         # This is a weird-looking but compact way of ensuring we have access to
