@@ -5,3 +5,4 @@ psycopg2==2.5.3
 py==1.4.23
 pytest==2.6.1
 pytest-django==2.6.2
+pytest-pythonpath==0.3.0
