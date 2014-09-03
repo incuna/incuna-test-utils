@@ -47,7 +47,6 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         """
         if request is None:
             request = self.create_request()
-            request._messages = DummyStorage()
 
         view = self.get_view()
         response = view(request, *args, **kwargs)
