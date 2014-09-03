@@ -30,3 +30,11 @@ class RequestTestCase(BaseRequestTestCase):
     def test_create_request_anonymous(self):
         request = self.create_request(auth=False)
         self.assertIsInstance(request.user, AnonymousUser)
+
+    def test_create_user(self):
+        user = self.create_user()
+        self.assertIsInstance(user, User)
+
+    def test_create_user_anonymous(self):
+        user = self.create_user(auth=False)
+        self.assertIsInstance(user, AnonymousUser)
