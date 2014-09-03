@@ -35,12 +35,12 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
             message = "This test must have a 'view_class' or 'view' attribute."
             raise ImproperlyConfigured(message)
 
-    def access_view(self, *args, request=None, **kwargs):
+    def access_view(self, request=None, *args, **kwargs):
         """
         Helper method that accesses the test's view.
 
-        Accepts a request parameter, which can be None.  If it is, this method
-        creates a basic request on your behalf.
+        Accepts an optional request parameter.  If this isn't supplied,
+        access_view creates a basic request on your behalf.
 
         Returns a HTTPResponse object with the request (created or otherwise)
         attached.
@@ -71,7 +71,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         response = render(request, response.template_name, response.context_data)
         return str(response.content)
 
-    def access_view_and_render_response(self, *view_args, request=None, expected_status=200, **view_kwargs):
+    def access_view_and_render_response(self, request=None, expected_status=200, *view_args, **view_kwargs):
         """
         Accesses the view and returns a string of HTML.
 
