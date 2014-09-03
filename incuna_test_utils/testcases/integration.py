@@ -62,9 +62,11 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     def render_to_str(self, response, request=None):
         """
         Render a HTTPResponse into a string that holds the HTML content.
+
+        Accepts an optional request parameter, and looks for a request attached
+        to the response if the optional parameter isn't specified.
         """
-        if response.request:
-            # Use the response's attached request if we have it.
+        if request is None:
             request = response.request
 
         response = render(request, response.template_name, response.context_data)
@@ -82,7 +84,14 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         (which defaults to 200), and args and kwargs for the view method.
         """
         response = self.access_view(*view_args, request=request, **view_kwargs)
+
+        # Assert that the response has the correct status code before we go
+        # any further.  Throwing accurately descriptive failures when something
+        # goes wrong is better than trying to run assertions on the content
+        # of a HTML response for some random 404 page.
         self.assertEqual(expected_status, response.status_code)
+
+        # Render the response and return it.
         return self.render_to_str(response)
 
     def assert_count(self, needle, haystack, count):
