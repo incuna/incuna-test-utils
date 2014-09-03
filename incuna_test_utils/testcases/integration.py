@@ -3,18 +3,6 @@ from django.shortcuts import render
 from .request import BaseRequestTestCase
 
 
-class DummyStorage:
-    def __init__(self):
-        self.store = set()
-
-    def add(self, level, message, extra_tags=''):
-        self.store.add(message)
-
-    def __iter__(self):
-        for item in self.store:
-            yield item
-
-
 class BaseIntegrationTestCase(BaseRequestTestCase):
     """
     A TestCase that operates similarly to a Selenium test.

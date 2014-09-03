@@ -2,6 +2,18 @@ from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase, RequestFactory
 
 
+class DummyStorage:
+    def __init__(self):
+        self.store = set()
+
+    def add(self, level, message, extra_tags=''):
+        self.store.add(message)
+
+    def __iter__(self):
+        for item in self.store:
+            yield item
+
+
 class BaseRequestTestCase(TestCase):
     """
     Extend django.test.TestCase with a create_request method.
@@ -16,8 +28,15 @@ class BaseRequestTestCase(TestCase):
             user = self.create_user(auth=auth)
         request = getattr(self.request_factory(), method)(url, **kwargs)
         request.user = user
+
         if 'data' in kwargs:
             request.DATA = kwargs['data']
+
+        if 'messages' in kwargs:
+            request._messages = kwargs['messages']
+        else:
+            request._messages = DummyStorage()
+
         return request
 
     def create_user(self, auth=True, **kwargs):
