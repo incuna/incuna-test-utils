@@ -34,16 +34,17 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         except AttributeError:
             return view
 
-    def access_view(self, request=None, *args, **kwargs):
+    def access_view(self, *args, **kwargs):
         """
         Helper method that accesses the test's view.
 
-        Accepts an optional request parameter.  If this isn't supplied,
+        Accepts an optional 'request' kwarg.  If this isn't supplied,
         access_view creates a basic request on your behalf.
 
         Returns a HTTPResponse object with the request (created or otherwise)
         attached.
         """
+        request = kwargs.pop('request', None)
         if request is None:
             request = self.create_request()
 
@@ -70,18 +71,23 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         response = render(request, response.template_name, response.context_data)
         return str(response.content)
 
-    def access_view_and_render_response(self, request=None, expected_status=200, *view_args, **view_kwargs):
+    def access_view_and_render_response(self, *args, **kwargs):
         """
         Accesses the view and returns a string of HTML.
 
         Combines access_view, an assertion on the returned status, and
         render_to_str.
 
-        Accepts an optional request (but will create a simple one if the
-        parameter isn't supplied), an expected status code for the response
-        (which defaults to 200), and args and kwargs for the view method.
+        Accepts an optional 'request' kwarg holding a HTTPRequest, but will
+        create a simple one if the parameter isn't supplied, and
+        'expected_status', an expected status code for the response, which
+        defaults to 200.  Other args and kwargs are passed on to the view
+        method.
         """
-        response = self.access_view(request, *view_args, **view_kwargs)
+        request = kwargs.pop('request', None)
+        expected_status = kwargs.pop('expected_status', 200)
+
+        response = self.access_view(request, *args, **kwargs)
 
         # Assert that the response has the correct status code before we go
         # any further.  Throwing accurately descriptive failures when something
