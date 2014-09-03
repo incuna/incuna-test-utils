@@ -26,13 +26,13 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         try:
             view = self.view
         except AttributeError:
-            message = "This test must have a 'view_class' or 'view' attribute."
+            message = "This test must have a 'view' attribute."
             raise ImproperlyConfigured(message)
         
         try:
-            return self.view.as_view()
+            return view.as_view()
         except AttributeError:
-            return self.view
+            return view
 
     def access_view(self, request=None, *args, **kwargs):
         """
