@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v3.1.2
+------
+* Fix `super` call in `BaseAPIRequestTestCase`
+
 v3.1.1
 ------
 * Fix bug with DummyStorage object not being iterable when calling render().
