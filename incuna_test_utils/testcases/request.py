@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
+from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase, RequestFactory
 
 
@@ -30,7 +31,7 @@ class BaseRequestTestCase(TestCase):
         view = view_class                   # class-based view
         view = staticmethod(view_func)      # function-based view
     """
-    request_factory = RequestFactory 
+    request_factory = RequestFactory
 
     def get_view(self):
         """
@@ -44,7 +45,7 @@ class BaseRequestTestCase(TestCase):
         except AttributeError:
             message = "This test must have a 'view' attribute."
             raise ImproperlyConfigured(message)
-        
+
         try:
             return view.as_view()
         except AttributeError:

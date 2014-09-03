@@ -1,6 +1,11 @@
 from django.contrib.auth.models import AnonymousUser, User
+from django.contrib.sessions.backends.base import SessionBase
+from django.core.exceptions import ImproperlyConfigured
 
-from incuna_test_utils.testcases.request import BaseRequestTestCase
+from incuna_test_utils.testcases.request import (
+    BaseRequestTestCase,
+    DummyStorage,
+)
 from tests.factories import UserFactory
 
 
@@ -12,6 +17,7 @@ class RequestTestCase(BaseRequestTestCase):
         self.assertEqual(request.method, 'GET')
         self.assertEqual(request.path, '/')
         self.assertIsInstance(request.user, User)
+        self.assertIsInstance(request._messages, DummyStorage)
 
     def test_create_request_post(self):
         request = self.create_request('post')
@@ -38,3 +44,38 @@ class RequestTestCase(BaseRequestTestCase):
     def test_create_user_anonymous(self):
         user = self.create_user(auth=False)
         self.assertIsInstance(user, AnonymousUser)
+
+    def test_add_session_to_request(self):
+        request = self.create_request()
+        self.add_session_to_request(request)
+        self.assertIsInstance(request.session, SessionBase)
+
+    def test_get_view(self):
+        with self.assertRaises(ImproperlyConfigured):
+            self.get_view()
+
+
+def function_view(request):
+    return request
+
+
+class RequestTestCaseFunctionView(BaseRequestTestCase):
+    view = staticmethod(function_view)
+
+    def test_get_view(self):
+        view = self.get_view()
+        self.assertEqual(view, function_view)
+
+
+class ClassView:
+    @classmethod
+    def as_view(cls):
+        return function_view
+
+
+class RequestTestCaseClassView(BaseRequestTestCase):
+    view = ClassView
+
+    def test_get_view(self):
+        view = self.get_view()
+        self.assertEqual(view, function_view)

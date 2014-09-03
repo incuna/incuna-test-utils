@@ -9,6 +9,7 @@ DATABASES = {
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sessions',
 )
-MIDDLEWARE_CLASSES=()
+MIDDLEWARE_CLASSES = ()
 SECRET_KEY = 'test'
