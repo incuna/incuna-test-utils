@@ -4,7 +4,7 @@ from django.test import TestCase, RequestFactory
 
 class DummyStorage:
     def __init__(self):
-        self.store = set()
+        self.store = list()
 
     def add(self, level, message, extra_tags=''):
         self.store.add(message)
