@@ -8,4 +8,4 @@ release:
 	python setup.py register sdist bdist_wheel upload
 
 test:
-	py.test --cov incuna_test_utils
+	py.test --cov incuna_test_utils tests
