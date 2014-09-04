@@ -15,10 +15,6 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     Must be subclassed with the following attributes in order to work:
     * user_factory
     * view (class-based or function-based view)
-
-    A function-based view must be provided wrapped in `staticmethod`:
-        view = staticmethod(view_func)
-    See superclass (BaseRequestTestCase) for more detail.
     """
 
     def access_view(self, *args, **kwargs):

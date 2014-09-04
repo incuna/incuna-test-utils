@@ -67,7 +67,7 @@ def function_view(request):
 
 
 class RequestTestCaseFunctionView(BaseRequestTestCase):
-    view = staticmethod(function_view)
+    view = function_view
 
     def test_get_view(self):
         view = self.get_view()
