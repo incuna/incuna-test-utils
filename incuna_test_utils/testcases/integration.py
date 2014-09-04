@@ -97,7 +97,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         # Build a verbose error message in case we need it.
         plural = '' if count == 1 else 's'
         message = 'Expected {count} instance{plural} of {needle}, but found {actual_count}, in {haystack}'
-        message = message.format_map(locals())
+        message = message.format(**locals())
 
         # Make the assertion.
         self.assertEqual(count, actual_count, message)
