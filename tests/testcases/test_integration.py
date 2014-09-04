@@ -45,3 +45,31 @@ class IntegrationTestCase(BaseIntegrationTestCase):
 
         with pytest.raises(AssertionError):
             self.assert_count(needle, haystack, count)
+
+    def test__assert_count_message(self):
+        haystack = [1, 1, 3, 1, 2, 4]
+        needle = 1
+        count = 1
+        actual_count = haystack.count(needle)
+
+        expected_message_args = (count, needle, actual_count, haystack)
+        expected_message = 'Expected {} instance of {}, but found {}, in {}'
+        expected_message = expected_message.format(*expected_message_args)
+
+        message_args = (needle, haystack, count, actual_count)
+        message = self._assert_count_message(*message_args)
+        assert message == expected_message
+
+    def test__assert_count_message_plural(self):
+        haystack = [1, 1, 3, 1, 2, 4]
+        needle = 1
+        count = 4
+        actual_count = haystack.count(needle)
+
+        expected_message_args = (count, needle, actual_count, haystack)
+        expected_message = 'Expected {} instances of {}, but found {}, in {}'
+        expected_message = expected_message.format(*expected_message_args)
+
+        message_args = (needle, haystack, count, actual_count)
+        message = self._assert_count_message(*message_args)
+        assert message == expected_message

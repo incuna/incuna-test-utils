@@ -81,6 +81,19 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         # Render the response and return it.
         return self.render_to_str(response)
 
+    @staticmethod
+    def _assert_count_message(needle, haystack, count, actual_count):
+        # Build a verbose error message in case we need it.
+        plural = '' if count == 1 else 's'
+        message = 'Expected {count} instance{plural} of {needle}, but found {actual_count}, in {haystack}'
+        return message.format(
+            count=count,
+            plural=plural,
+            needle=needle,
+            actual_count=actual_count,
+            haystack=haystack,
+        )
+
     def assert_count(self, needle, haystack, count):
         """
         Assert that 'needle' occurs exactly 'count' times in 'haystack'.
@@ -90,10 +103,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         """
         actual_count = haystack.count(needle)
 
-        # Build a verbose error message in case we need it.
-        plural = '' if count == 1 else 's'
-        message = 'Expected {count} instance{plural} of {needle}, but found {actual_count}, in {haystack}'
-        message = message.format(**locals())
+        message_args = (needle, haystack, count, actual_count)
+        message = self._assert_count_message(*message_args)
 
-        # Make the assertion.
         self.assertEqual(count, actual_count, message)
