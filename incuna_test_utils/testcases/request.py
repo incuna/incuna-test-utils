@@ -25,15 +25,13 @@ class BaseRequestTestCase(TestCase):
 
     A class- or function-based view can be attached to the test class as the
     'view' attribute.  get_view() returns a callable version of that
-    view, abstracting over whether it's class- or function-based.  However,
-    due to a quirk of Python's way of attaching things to classes, any
-    function-based view must currently be added wrapped in `staticmethod()`:
-        view = view_class                   # class-based view
-        view = staticmethod(view_func)      # function-based view
+    view, abstracting over whether it's class- or function-based.
     """
+
     request_factory = RequestFactory
 
-    def get_view(self):
+    @classmethod
+    def get_view(cls):
         """
         Returns the class's attached view, as a callable.
 
@@ -41,7 +39,7 @@ class BaseRequestTestCase(TestCase):
         if it doesn't.  Otherwise, it returns the view, ensuring it's callable.
         """
         try:
-            view = self.view
+            view = cls.view
         except AttributeError:
             message = "This test must have a 'view' attribute."
             raise ImproperlyConfigured(message)
