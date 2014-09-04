@@ -39,8 +39,8 @@ class BaseRequestTestCase(TestCase):
         if it doesn't.  Otherwise, it returns the view, ensuring it's callable.
         """
         try:
-            view = cls.view
-        except AttributeError:
+            view = cls.__dict__['view']
+        except KeyError:
             message = "This test must have a 'view' attribute."
             raise ImproperlyConfigured(message)
 
