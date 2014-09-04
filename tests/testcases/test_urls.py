@@ -1,6 +1,6 @@
 from incuna_test_utils.testcases.urls import URLTestCase
 
-from . import views
+from .. import views
 
 
 class TestURLTestCase(URLTestCase):

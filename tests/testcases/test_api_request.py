@@ -7,12 +7,12 @@ class APIRequestTestCase(BaseAPIRequestTestCase):
 
     def test_create_request_format(self):
         request = self.create_request()
-        self.assertEqual(request.META['format'], 'json')
+        assert request.META['format'] == 'json'
 
     def test_create_request_auth(self):
         request = self.create_request()
-        self.assertTrue(request.user.is_authenticated())
+        assert request.user.is_authenticated()
 
     def test_create_request_no_auth(self):
         request = self.create_request(auth=False)
-        self.assertFalse(request.user.is_authenticated())
+        assert not request.user.is_authenticated()
