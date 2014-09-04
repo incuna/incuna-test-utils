@@ -37,6 +37,11 @@ class RequestTestCase(BaseRequestTestCase):
         request = self.create_request(auth=False)
         self.assertIsInstance(request.user, AnonymousUser)
 
+    def test_create_request_data(self):
+        data = {'foo': 'bar'}
+        request = self.create_request(data=data)
+        self.assertEqual(request.DATA, data)
+
     def test_create_user(self):
         user = self.create_user()
         self.assertIsInstance(user, User)
