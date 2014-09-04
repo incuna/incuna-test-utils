@@ -7,6 +7,8 @@ DATABASES = {
     ),
 }
 INSTALLED_APPS = (
+    'tests',
+
     'feincms.module.page',
 
     'django.contrib.auth',
