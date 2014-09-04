@@ -30,3 +30,17 @@ class IntegrationTestCase(BaseIntegrationTestCase):
 
         with self.assertRaises(AttributeError):
             response.request.session
+
+    def test_assert_count(self):
+        haystack = [1, 1, 3, 1, 2, 4]
+        needle = 1
+        count = 3
+        self.assert_count(needle, haystack, count)
+
+    def test_assert_count_fail(self):
+        haystack = [1, 1, 3, 1, 2, 4]
+        needle = 1
+        count = 4
+
+        with self.assertRaises(AssertionError):
+            self.assert_count(needle, haystack, count)
