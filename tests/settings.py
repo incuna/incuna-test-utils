@@ -12,4 +12,5 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
 )
 MIDDLEWARE_CLASSES = ()
+PASSWORD_HASHERS = ['django.contrib.auth.hashers.MD5PasswordHasher']
 SECRET_KEY = 'test'
