@@ -9,7 +9,7 @@ class DummyStorage:
         self.store = list()
 
     def add(self, level, message, extra_tags=''):
-        self.store.add(message)
+        self.store.append(message)
 
     def __iter__(self):
         for item in self.store:
