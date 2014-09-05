@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib.sessions.backends.base import SessionBase
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
@@ -6,6 +7,9 @@ import pytest
 from incuna_test_utils.testcases.integration import BaseIntegrationTestCase
 from tests.factories import UserFactory
 from tests.views import my_view, MyTemplateView
+
+
+TEMPLATE_CONTENT = u'†εмρʟαтℯ ℭøηт℮ηт.\n'
 
 
 @pytest.fixture(scope='module')
@@ -99,7 +103,7 @@ class TestIntegration:
         response = template_view_integration.access_view(request=request)
 
         content = template_view_integration.render_to_str(response)
-        assert content == 'Template content.\n'
+        assert content == TEMPLATE_CONTENT
 
     def test_access_view_and_render_response(self, template_view_integration):
         request = template_view_integration.create_request(auth=False)
@@ -107,4 +111,4 @@ class TestIntegration:
         content = template_view_integration.access_view_and_render_response(
             request=request,
         )
-        assert content == 'Template content.\n'
+        assert content == TEMPLATE_CONTENT
