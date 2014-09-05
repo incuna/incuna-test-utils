@@ -1,4 +1,3 @@
-from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
 
 from .request import BaseRequestTestCase
@@ -52,7 +51,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
             request = response.request
 
         response = render(request, response.template_name, response.context_data)
-        return str(response.content)
+        return response.content.decode('utf-8')
 
     def access_view_and_render_response(self, *args, **kwargs):
         """
