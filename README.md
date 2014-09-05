@@ -1,6 +1,6 @@
 # incuna-test-utils
 
-Incuna Test Utils is a collection of TestCases and other helpers for Django apps.
+Incuna Test Utils is a collection of TestCases and other helpers for testing Django apps.
 
 ## TestCases
 
