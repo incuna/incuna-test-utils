@@ -6,7 +6,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     version='3.2.0',
-    description='',
+    description='icuna-test-utils',
     long_description=open('README.rst').read(),
     author='Incuna',
     author_email='admin@incuna.com',
