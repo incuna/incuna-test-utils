@@ -1,6 +1,13 @@
 Changelog for incuna-test-utils
 ============================
 
+v4.0.0
+------
+* Remove requirement for wrapping function-based views in staticmethod.
+* Update factories to use `class Meta` with a `model` attribute instead of `FACTORY_FOR`
+* Add tests for all code
+* Fix various bugs caught by the new tests
+
 v3.2.0
 ------
 * Add ability to handle function-based views to BaseRequestTestCase.
