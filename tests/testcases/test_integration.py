@@ -14,7 +14,10 @@ def simple_integration():
         user_factory = UserFactory
         view = my_view
 
-    return IntegrationTestCase()
+    # Python 2 doesn't allow instantiation of a TestCase without a
+    # specified test method, so specify a method known to exist on
+    # all TestCase instances. We don't care which method this is.
+    return IntegrationTestCase(methodName='__init__')
 
 
 @pytest.fixture(scope='module')
@@ -23,7 +26,10 @@ def template_view_integration():
         user_factory = UserFactory
         view = MyTemplateView
 
-    return IntegrationTestCase()
+    # Python 2 doesn't allow instantiation of a TestCase without a
+    # specified test method, so specify a method known to exist on
+    # all TestCase instances. We don't care which method this is.
+    return IntegrationTestCase(methodName='__init__')
 
 
 class TestIntegration:
