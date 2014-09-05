@@ -91,5 +91,14 @@ class TestIntegration:
     def test_render_to_str(self, template_view_integration):
         request = template_view_integration.create_request(auth=False)
         response = template_view_integration.access_view(request=request)
+
         content = template_view_integration.render_to_str(response)
+        assert content == 'Template content.\n'
+
+    def test_access_view_and_render_response(self, template_view_integration):
+        request = template_view_integration.create_request(auth=False)
+
+        content = template_view_integration.access_view_and_render_response(
+            request=request,
+        )
         assert content == 'Template content.\n'
