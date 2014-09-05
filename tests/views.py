@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.views.generic import View
+from django.views.generic import TemplateView, View
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -16,3 +16,7 @@ class MyView(View):
 class MyAPIView(APIView):
     def get(self, request, format=None):
         return Response({})
+
+
+class MyTemplateView(TemplateView):
+    template_name = 'page.html'

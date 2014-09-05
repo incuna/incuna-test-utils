@@ -5,7 +5,7 @@ import pytest
 
 from incuna_test_utils.testcases.integration import BaseIntegrationTestCase
 from tests.factories import UserFactory
-from tests.views import my_view
+from tests.views import my_view, MyTemplateView
 
 
 @pytest.fixture(scope='module')
@@ -13,6 +13,15 @@ def simple_integration():
     class IntegrationTestCase(BaseIntegrationTestCase):
         user_factory = UserFactory
         view = my_view
+
+    return IntegrationTestCase()
+
+
+@pytest.fixture(scope='module')
+def template_view_integration():
+    class IntegrationTestCase(BaseIntegrationTestCase):
+        user_factory = UserFactory
+        view = MyTemplateView
 
     return IntegrationTestCase()
 
@@ -78,3 +87,9 @@ class TestIntegration:
         message_args = (needle, haystack, count, actual_count)
         message = simple_integration._assert_count_message(*message_args)
         assert message == expected_message
+
+    def test_render_to_str(self, template_view_integration):
+        request = template_view_integration.create_request(auth=False)
+        response = template_view_integration.access_view(request=request)
+        content = template_view_integration.render_to_str(response)
+        assert content == 'Template content.\n'
