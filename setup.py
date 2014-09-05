@@ -7,7 +7,7 @@ setup(
     include_package_data=True,
     version='4.0.0',
     description='Custom TestCases and other test helpers for Django apps',
-    long_description=open('README.rst').read(),
+    long_description=open('README.md').read(),
     author='Incuna',
     author_email='admin@incuna.com',
     url='https://github.com/incuna/incuna-test-utils/',
