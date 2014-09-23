@@ -59,4 +59,6 @@ This factory can be used to create instances of [`Feincms`](http://feincms-djang
 
 * `wipe_id_fieldson_django_lt_17` removes any field name ending in `_id` from a collection if the django version is less than `1.7`. This is useful for testing a model has the fields expected.
 
-* `Python2CountEqualMixin` aliases the python 2.7 `TestCase.assertItemsEqual` method as `assertCountEqual` to match the python 3 api.
+* `Python2AssertMixin` aliases python 2.7 assert methods to match the python 3 api.
+  * `TestCase.assertItemsEqual` is aliased as `assertCountEqual`
+  * `TestCase.assertRegexpMatches` is aliased as `assertRegex`
