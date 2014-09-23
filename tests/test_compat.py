@@ -29,7 +29,10 @@ def testcase():
     class Python2AssertTestCase(compat.Python2AssertMixin, TestCase):
         pass
 
-    return Python2AssertTestCase()
+    # Python 2 doesn't allow instantiation of a TestCase without a
+    # specified test method, so specify a method known to exist on
+    # all TestCase instances. We don't care which method this is.
+    return Python2AssertTestCase(methodName='__init__')
 
 
 requires_python2 = pytest.mark.skipif(
