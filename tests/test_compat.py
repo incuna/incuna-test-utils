@@ -26,8 +26,9 @@ def test_wipe_id_fields_gte_17():
 
 @pytest.fixture(scope='module')
 def testcase():
+    """Return a TestCase instance with python 3 assert methods."""
     class Python2AssertTestCase(compat.Python2AssertMixin, TestCase):
-        pass
+        """A TestCase with python 3 asserts available."""
 
     # Python 2 doesn't allow instantiation of a TestCase without a
     # specified test method, so specify a method known to exist on
@@ -49,19 +50,27 @@ requires_python3 = pytest.mark.skipif(
 
 @requires_python2
 def test_python2_count_equal(testcase):
+    """
+    Check a python 2 TestCase aliases assertItemsEqual as assertCountEqual.
+    """
     assert testcase.assertCountEqual == testcase.assertItemsEqual
 
 
 @requires_python3
 def test_python3_count_equal(testcase):
+    """Check a python 3 TestCase has assertCountEqual available."""
     assert hasattr(testcase, 'assertCountEqual')
 
 
 @requires_python2
 def test_python2_regex(testcase):
+    """
+    Check a python 2 TestCase aliases assertRegexpMatches as assertRegex.
+    """
     assert testcase.assertRegex == testcase.assertRegexpMatches
 
 
 @requires_python3
 def test_python3_regex(testcase):
+    """Check a python 3 TestCase has assertRegex available."""
     assert hasattr(testcase, 'assertRegex')
