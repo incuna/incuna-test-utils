@@ -32,21 +32,33 @@ def testcase():
     return Python2AssertTestCase()
 
 
-@pytest.mark.skipif(sys.version_info >= (3,), reason='Requires python 2')
+requires_python2 = pytest.mark.skipif(
+    sys.version_info >= (3,),
+    reason='Requires python 2',
+)
+
+
+requires_python3 = pytest.mark.skipif(
+    sys.version_info < (3,),
+    reason='Requires python 3',
+)
+
+
+@requires_python2
 def test_python2_count_equal(testcase):
     assert testcase.assertCountEqual == testcase.assertItemsEqual
 
 
-@pytest.mark.skipif(sys.version_info < (3,), reason='Requires python 3')
+@requires_python3
 def test_python3_count_equal(testcase):
     assert hasattr(testcase, 'assertCountEqual')
 
 
-@pytest.mark.skipif(sys.version_info >= (3,), reason='Requires python 2')
+@requires_python2
 def test_python2_regex(testcase):
     assert testcase.assertRegex == testcase.assertRegexpMatches
 
 
-@pytest.mark.skipif(sys.version_info < (3,), reason='Requires python 3')
+@requires_python3
 def test_python3_regex(testcase):
     assert hasattr(testcase, 'assertRegex')
