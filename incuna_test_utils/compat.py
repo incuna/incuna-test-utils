@@ -24,9 +24,13 @@ class Python2AssertMixin(object):
 
     Asserts added:
     * assertCountEqual
+    * assertRegex
     """
 
     def __init__(self, *args, **kwargs):
         super(Python2AssertMixin, self).__init__(*args, **kwargs)
         if not hasattr(self, 'assertCountEqual'):
             self.assertCountEqual = self.assertItemsEqual
+
+        if not hasattr(self, 'assertRegex'):
+            self.assertRegex = self.assertRegexpMatches
