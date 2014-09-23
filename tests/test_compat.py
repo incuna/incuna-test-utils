@@ -1,4 +1,7 @@
 from mock import patch
+from unittest import TestCase
+
+import pytest
 
 from incuna_test_utils import compat
 
@@ -20,19 +23,33 @@ def test_wipe_id_fields_gte_17():
         assert wiped_fields == fields
 
 
-def test_python_2_count_equal():
-    class Python2TestCase(compat.Python2CountEqualMixin):
-        def assertItemsEqual(self, first, second):
-            pass
+@pytest.fixture(scope='module')
+def testcase():
+    """Return a TestCase instance with python 3 assert methods."""
+    class Python2AssertTestCase(compat.Python2AssertMixin, TestCase):
+        """A TestCase with python 3 asserts available."""
 
-    testcase = Python2TestCase()
-    assert hasattr(testcase, 'assertCountEqual')
+    # Python 2 doesn't allow instantiation of a TestCase without a
+    # specified test method, so specify a method known to exist on
+    # all TestCase instances. We don't care which method this is.
+    return Python2AssertTestCase(methodName='__init__')
 
 
-def test_python3_count_equal():
-    class Python3TestCase(compat.Python2CountEqualMixin):
-        def assertCountEqual(self, first, second):
-            pass
+def test_assert_count_equal(testcase):
+    """
+    Check assertCountEqual is available on a TestCase with Python2AssertMixin.
+    """
+    testcase.assertCountEqual((1, 1, 2), (1, 2, 1))
 
-    testcase = Python3TestCase()
-    assert hasattr(testcase, 'assertCountEqual')
+    with pytest.raises(AssertionError):
+        testcase.assertCountEqual((1, 1, 2), (2, 1, 2))
+
+
+def test_assert_regex(testcase):
+    """
+    Check assertRegex is available on a TestCase with Python2AssertMixin.
+    """
+    testcase.assertRegex('foo-bar', '[a-z]+')
+
+    with pytest.raises(AssertionError):
+        testcase.assertRegex('foo-bar', '[A-Z]+')

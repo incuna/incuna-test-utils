@@ -1,6 +1,11 @@
 Changelog for incuna-test-utils
 ============================
 
+Upcoming release
+----------------
+* Rename Python2CountEqualMixin to Python2AssertMixin
+* Add assertRegex to Python2AssertMixin
+
 v4.0.0
 ------
 * Remove requirement for wrapping function-based views in staticmethod.
