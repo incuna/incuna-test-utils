@@ -1,5 +1,4 @@
 from mock import patch
-import sys
 from unittest import TestCase
 
 import pytest
@@ -36,41 +35,21 @@ def testcase():
     return Python2AssertTestCase(methodName='__init__')
 
 
-requires_python2 = pytest.mark.skipif(
-    sys.version_info >= (3,),
-    reason='Requires python 2',
-)
-
-
-requires_python3 = pytest.mark.skipif(
-    sys.version_info < (3,),
-    reason='Requires python 3',
-)
-
-
-@requires_python2
-def test_python2_count_equal(testcase):
+def test_assert_count_equal(testcase):
     """
-    Check a python 2 TestCase aliases assertItemsEqual as assertCountEqual.
+    Check assertCountEqual is available on a TestCase with Python2AssertMixin.
     """
-    assert testcase.assertCountEqual == testcase.assertItemsEqual
+    testcase.assertCountEqual((1, 1, 2), (1, 2, 1))
+
+    with pytest.raises(AssertionError):
+        testcase.assertCountEqual((1, 1, 2), (2, 1, 2))
 
 
-@requires_python3
-def test_python3_count_equal(testcase):
-    """Check a python 3 TestCase has assertCountEqual available."""
-    assert hasattr(testcase, 'assertCountEqual')
-
-
-@requires_python2
-def test_python2_regex(testcase):
+def test_assert_regex(testcase):
     """
-    Check a python 2 TestCase aliases assertRegexpMatches as assertRegex.
+    Check assertRegex is available on a TestCase with Python2AssertMixin.
     """
-    assert testcase.assertRegex == testcase.assertRegexpMatches
+    testcase.assertRegex('foo-bar', '[a-z]+')
 
-
-@requires_python3
-def test_python3_regex(testcase):
-    """Check a python 3 TestCase has assertRegex available."""
-    assert hasattr(testcase, 'assertRegex')
+    with pytest.raises(AssertionError):
+        testcase.assertRegex('foo-bar', '[A-Z]+')
