@@ -36,7 +36,7 @@ class Python3TestCase(compat.Python2AssertMixin):
         pass
 
 
-def test_python_2_count_equal():
+def test_python2_count_equal():
     testcase = Python2TestCase()
     assert hasattr(testcase, 'assertCountEqual')
 
@@ -46,7 +46,7 @@ def test_python3_count_equal():
     assert hasattr(testcase, 'assertCountEqual')
 
 
-def test_python_2_regex():
+def test_python2_regex():
     testcase = Python2TestCase()
     assert hasattr(testcase, 'assertRegex')
 
