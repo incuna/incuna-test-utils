@@ -21,7 +21,7 @@ def test_wipe_id_fields_gte_17():
 
 
 def test_python_2_count_equal():
-    class Python2TestCase(compat.Python2CountEqualMixin):
+    class Python2TestCase(compat.Python2AssertMixin):
         def assertItemsEqual(self, first, second):
             pass
 
@@ -30,7 +30,7 @@ def test_python_2_count_equal():
 
 
 def test_python3_count_equal():
-    class Python3TestCase(compat.Python2CountEqualMixin):
+    class Python3TestCase(compat.Python2AssertMixin):
         def assertCountEqual(self, first, second):
             pass
 
