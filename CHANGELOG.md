@@ -1,8 +1,8 @@
 Changelog for incuna-test-utils
 ============================
 
-Upcoming release
-----------------
+v5.0.0
+------
 * Rename Python2CountEqualMixin to Python2AssertMixin
 * Add assertRegex to Python2AssertMixin
 
