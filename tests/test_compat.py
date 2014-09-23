@@ -1,4 +1,8 @@
 from mock import patch
+import sys
+from unittest import TestCase
+
+import pytest
 
 from incuna_test_utils import compat
 
@@ -20,37 +24,29 @@ def test_wipe_id_fields_gte_17():
         assert wiped_fields == fields
 
 
-class Python2TestCase(compat.Python2AssertMixin):
-    def assertItemsEqual(self, first, second):
+@pytest.fixture(scope='module')
+def testcase():
+    class Python2AssertTestCase(compat.Python2AssertMixin, TestCase):
         pass
 
-    def assertRegexpMatches(self, text, regexp, msg=None):
-        pass
+    return Python2AssertTestCase()
 
 
-class Python3TestCase(compat.Python2AssertMixin):
-    def assertCountEqual(self, first, second):
-        pass
-
-    def assertRegex(self, text, regex, msg=None):
-        pass
+@pytest.mark.skipif(sys.version_info >= (3,), reason='Requires python 2')
+def test_python2_count_equal(testcase):
+    assert testcase.assertCountEqual == testcase.assertItemsEqual
 
 
-def test_python2_count_equal():
-    testcase = Python2TestCase()
+@pytest.mark.skipif(sys.version_info < (3,), reason='Requires python 3')
+def test_python3_count_equal(testcase):
     assert hasattr(testcase, 'assertCountEqual')
 
 
-def test_python3_count_equal():
-    testcase = Python3TestCase()
-    assert hasattr(testcase, 'assertCountEqual')
+@pytest.mark.skipif(sys.version_info >= (3,), reason='Requires python 2')
+def test_python2_regex(testcase):
+    assert testcase.assertRegex == testcase.assertRegexpMatches
 
 
-def test_python2_regex():
-    testcase = Python2TestCase()
-    assert hasattr(testcase, 'assertRegex')
-
-
-def test_python3_regex():
-    testcase = Python3TestCase()
+@pytest.mark.skipif(sys.version_info < (3,), reason='Requires python 3')
+def test_python3_regex(testcase):
     assert hasattr(testcase, 'assertRegex')
