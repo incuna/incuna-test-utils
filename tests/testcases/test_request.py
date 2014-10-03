@@ -1,3 +1,5 @@
+from unittest.mock import Mock
+
 from django.contrib.auth.models import AnonymousUser, User
 from django.contrib import messages
 from django.contrib.sessions.backends.base import SessionBase
@@ -61,6 +63,13 @@ class RequestTestCase(BaseRequestTestCase):
         with pytest.raises(ImproperlyConfigured):
             self.get_view()
 
+    def test_view_instance(self):
+        """
+        Check view_instance raises ImproperlyConfigured if view is not set.
+        """
+        with pytest.raises(ImproperlyConfigured):
+            self.view_instance()
+
 
 def function_view(request):
     return request
@@ -75,6 +84,11 @@ class RequestTestCaseFunctionView(BaseRequestTestCase):
 
 
 class ClassView:
+    def __init__(self, request, args, kwargs):
+        self.request = request
+        self.args = args
+        self.kwargs = kwargs
+
     @classmethod
     def as_view(cls):
         return function_view
@@ -86,6 +100,21 @@ class RequestTestCaseClassView(BaseRequestTestCase):
     def test_get_view(self):
         view = self.get_view()
         assert view == function_view
+
+    def test_view_instance(self):
+        """
+        Check view_instance adds request, args and kwargs to a view instance.
+        """
+        request = Mock()
+        args = (Mock(),)
+        kwargs = {'mock': Mock()}
+
+        view = self.view_instance(request, *args, **kwargs)
+
+        assert isinstance(view, self.view)
+        assert view.request == request
+        assert view.args == args
+        assert view.kwargs == kwargs
 
 
 class TestDummyStorage:

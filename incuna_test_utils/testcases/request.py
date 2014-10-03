@@ -49,6 +49,23 @@ class BaseRequestTestCase(TestCase):
         except AttributeError:
             return view
 
+    @classmethod
+    def view_instance(cls, request=None, *args, **kwargs):
+        """
+        Returns an instance of the class's attached view.
+
+        Checks self.view exists, and throws an ImproperlyConfigured exception
+        if it doesn't.  Otherwise, it returns the view instance with request,
+        args and kwargs set.
+        """
+        try:
+            view = cls.__dict__['view']
+        except KeyError:
+            message = "This test must have a 'view' attribute."
+            raise ImproperlyConfigured(message)
+
+        return view(request=request, args=args, kwargs=kwargs)
+
     @staticmethod
     def add_session_to_request(request):
         """Annotate a request object with a session."""
