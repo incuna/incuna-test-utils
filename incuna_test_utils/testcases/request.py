@@ -59,8 +59,8 @@ class BaseRequestTestCase(TestCase):
         args and kwargs set.
         """
         try:
-            view = cls.__dict__['view']
-        except KeyError:
+            view = cls.view
+        except AttributeError:
             message = "This test must have a 'view' attribute."
             raise ImproperlyConfigured(message)
 
