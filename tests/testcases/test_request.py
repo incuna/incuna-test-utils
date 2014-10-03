@@ -1,5 +1,3 @@
-from unittest.mock import Mock
-
 from django.contrib.auth.models import AnonymousUser, User
 from django.contrib import messages
 from django.contrib.sessions.backends.base import SessionBase
@@ -105,9 +103,9 @@ class RequestTestCaseClassView(BaseRequestTestCase):
         """
         Check view_instance adds request, args and kwargs to a view instance.
         """
-        request = Mock()
-        args = (Mock(),)
-        kwargs = {'mock': Mock()}
+        request = object()
+        args = (object(),)
+        kwargs = {'mock': object()}
 
         view = self.view_instance(request, *args, **kwargs)
 
