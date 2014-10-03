@@ -15,6 +15,7 @@ These are found in `incuna_test_utils.testcases`.
 `BaseRequestTestCase` provides various helper methods for working with django views:
 
 * `get_view` returns a view callable based on a `view` attribute set on the `TestCase` class. `view` can be either a function-based or a class-based view.
+* `view_instance` returns an instance of a class-based `view` attribute set on the `TestCase` class. `view_instance` accepts a `request` and `*args` and `**kwargs`. These are set on the `view` instance.
 * `add_session_to_request` gives a `request` a `session`.
 * `create_user` returns a `user` using either `AnonymousUser` or a `user_factory` attribute set on the `TestCase`. The `user_factory` should have a `create` method that returns a `user`. [`factory_boy`](http://factoryboy.readthedocs.org/en/latest/index.html) is recommended.
 * `create_request` wraps Django's `RequestFactory` to provide useful defaults. It returns a `request` with `user` and `_messages` attributes. It can also set `DATA` and `session` on the `request`.
