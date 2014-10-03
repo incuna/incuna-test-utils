@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v5.1.0
+------
+* Add `view_instance` method to RequestTestCase
+
 v5.0.0
 ------
 * Rename Python2CountEqualMixin to Python2AssertMixin
