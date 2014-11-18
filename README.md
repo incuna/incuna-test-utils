@@ -1,4 +1,5 @@
-# incuna-test-utils [![Build Status](https://travis-ci.org/incuna/incuna-test-utils.svg?branch=master)](https://travis-ci.org/incuna/incuna-test-utils?branch=master)
+# incuna-test-utils
+[![Build Status](https://travis-ci.org/incuna/incuna-test-utils.svg?branch=master)](https://travis-ci.org/incuna/incuna-test-utils?branch=master)
 
 Incuna Test Utils is a collection of TestCases and other helpers for testing Django apps.
 
