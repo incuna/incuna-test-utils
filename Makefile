@@ -8,4 +8,5 @@ release:
 	python setup.py register sdist bdist_wheel upload
 
 test:
-	py.test --cov-report term-missing --cov incuna_test_utils tests
+	@py.test --cov-report term-missing --cov incuna_test_utils tests
+	@flake8 .
