@@ -11,6 +11,7 @@ INSTALLED_APPS = (
 
     'feincms.module.page',
 
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -19,3 +20,4 @@ MIDDLEWARE_CLASSES = ()
 PASSWORD_HASHERS = ['django.contrib.auth.hashers.MD5PasswordHasher']
 ROOT_URLCONF = 'tests.urls'
 SECRET_KEY = 'test'
+FEINCMS_USE_PAGE_ADMIN = False

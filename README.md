@@ -21,6 +21,30 @@ These are found in `incuna_test_utils.testcases`.
 * `create_user` returns a `user` using either `AnonymousUser` or a `user_factory` attribute set on the `TestCase`. The `user_factory` should have a `create` method that returns a `user`. [`factory_boy`](http://factoryboy.readthedocs.org/en/latest/index.html) is recommended.
 * `create_request` wraps Django's `RequestFactory` to provide useful defaults. It returns a `request` with `user` and `_messages` attributes. It can also set `DATA` and `session` on the `request`.
 
+### `integration.AdminIntegrationTestCase`
+
+`AdminIntegrationTestCase` provides a `TestCase` to test the django admin actions such
+as `add`, `change`, `changelist` and `delete`.
+`AdminIntegrationTestCase` should be subclassed and should define two attributes:
+ - a `user_factory` to create an authenticated client;
+ - a `model` to test.
+
+Example:
+```python
+from incuna_test_utils.integration import AdminIntegrationTestCase
+
+
+class TestUserAdmin(AdminIntegrationTestCase):
+    user_factory = factories.UserFactory
+    model = ModelToTest
+
+    def test_admin_add_page(self):
+        response = self.get_admin_add_page()
+        self.assertEqual(response.status_code, 200)
+
+    ...
+```
+
 ### `integration.BaseIntegrationTestCase`
 
 `BaseIntegrationTestCase` extends `BaseRequestTestCase` and adds more helper methods useful for integration tests:

@@ -1,6 +1,57 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
+from django.test import TestCase
 
 from .request import BaseRequestTestCase
+
+
+class BaseAdminIntegrationTestCase(TestCase):
+    """Base class to test the admin.
+
+    Provide methods to access `add`, `changelist`, `change` and `delete` pages.
+
+    Must be subclassed with the following attributes in order to work:
+      * `user_factory` which defines a 'FactoryBoy' User factory to authenticate
+    the client;
+      * `model` which defines the model to test.
+    """
+    def setUp(self):
+        """Create a user and authenticate it on the client."""
+        admin_user = self.user_factory.create(is_active=True, is_staff=True)
+        logged_in = self.client.login(
+            username=admin_user.username,
+            password=admin_user.raw_password,
+        )
+        self.assertTrue(logged_in)
+
+    def get_url_name(self, action):
+        """Generate admin url name for `self.model`."""
+        return 'admin:{app}_{model}_{action}'.format(
+            app=self.model._meta.app_label,
+            model=self.model._meta.object_name.lower(),
+            action=action,
+        )
+
+    def get_admin_page(self, page, args=None):
+        """Generic method to `GET` an admin page."""
+        url_name = self.get_url_name(page)
+        return self.client.get(reverse(url_name, args=args))
+
+    def get_admin_add_page(self):
+        """`GET` the add page for the model admin."""
+        return self.get_admin_page('add')
+
+    def get_admin_changelist_page(self):
+        """`GET` the changelist page for the model admin."""
+        return self.get_admin_page('changelist')
+
+    def get_admin_change_page(self, obj):
+        """`GET` the object change page for the model admin."""
+        return self.get_admin_page('change', (obj.pk,))
+
+    def get_admin_delete_page(self, obj):
+        """`GET` the object delete page for the model admin."""
+        return self.get_admin_page('delete', (obj.pk,))
 
 
 class BaseIntegrationTestCase(BaseRequestTestCase):
