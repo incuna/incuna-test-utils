@@ -6,9 +6,6 @@ from django.test import TestCase
 from .request import BaseRequestTestCase
 
 
-User = get_user_model()
-
-
 class BaseAdminIntegrationTestCase(TestCase):
     """Base class to test the admin.
 
@@ -22,6 +19,7 @@ class BaseAdminIntegrationTestCase(TestCase):
     def setUp(self):
         """Create a user and authenticate it on the client."""
         admin_user = self.user_factory.create(is_active=True, is_staff=True)
+        User = get_user_model()
         logged_in = self.client.login(
             username=getattr(admin_user, User.USERNAME_FIELD),
             password=admin_user.raw_password,
