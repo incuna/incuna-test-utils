@@ -1,6 +1,49 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
+from django.test import TestCase
 
 from .request import BaseRequestTestCase
+
+
+class BaseAdminIntegrationTestCase(TestCase):
+    """Base class to test the admin.
+
+    Provide methods to access `add`, `changelist`, `change` and `delete` pages.
+
+    Must be subclassed with the following attributes in order to work:
+      * user_factory
+      * model
+    """
+    def setUp(self):
+        admin_user = self.user_factory.create(is_active=True, is_staff=True)
+        logged_in = self.client.login(
+            username=admin_user.username,
+            password=admin_user.raw_password,
+        )
+        self.assertTrue(logged_in)
+
+    def get_url_name(self, action):
+        return 'admin:{app}_{model}_{action}'.format(
+            app=self.model._meta.app_label,
+            model=self.model._meta.object_name.lower(),
+            action=action,
+        )
+
+    def get_admin_add_page(self):
+        url_name = self.get_url_name('add')
+        return self.client.get(reverse(url_name))
+
+    def get_admin_changelist_page(self):
+        url_name = self.get_url_name('changelist')
+        return self.client.get(reverse(url_name))
+
+    def get_admin_change_page(self, obj):
+        url_name = self.get_url_name('change')
+        return self.client.get(reverse(url_name, args=[obj.pk]))
+
+    def get_admin_delete_page(self, obj):
+        url_name = self.get_url_name('delete')
+        return self.client.get(reverse(url_name, args=[obj.pk]))
 
 
 class BaseIntegrationTestCase(BaseRequestTestCase):
