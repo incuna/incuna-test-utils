@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+Upcoming
+--------
+* Add `AdminIntegrationTestCase`
+
 v5.1.0
 ------
 * Add `view_instance` method to RequestTestCase
