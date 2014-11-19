@@ -1,5 +1,5 @@
-from feincms.module.page.models import Page
 import pytest
+from feincms.module.page.models import Page
 
 from incuna_test_utils.factories.feincms_page import PageFactory
 

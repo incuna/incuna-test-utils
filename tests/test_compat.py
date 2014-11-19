@@ -1,7 +1,7 @@
-from mock import patch
 from unittest import TestCase
 
 import pytest
+from mock import patch
 
 from incuna_test_utils import compat
 

@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.exceptions import ImproperlyConfigured
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory, TestCase
 
 
 class DummyStorage:

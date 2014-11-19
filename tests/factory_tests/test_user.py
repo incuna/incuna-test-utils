@@ -1,7 +1,7 @@
 import pytest
 
-from ..models import User
 from incuna_test_utils.factories.user import BaseUserFactory
+from tests.models import User
 
 
 class UserFactory(BaseUserFactory):
