@@ -12,7 +12,12 @@ class URLTestMixin(object):
         Check the expected_url resolves to the expected view.
         """
 
-        reversed_url = reverse(url_name, urlconf=urlconf, args=url_args, kwargs=url_kwargs)
+        reversed_url = reverse(
+            url_name,
+            urlconf=urlconf,
+            args=url_args,
+            kwargs=url_kwargs,
+        )
         self.assertEqual(reversed_url, expected_url)
 
         resolved_view = resolve(expected_url, urlconf=urlconf).func
