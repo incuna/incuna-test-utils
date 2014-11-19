@@ -40,21 +40,21 @@ It returns a `request` with `user` and `_messages` attributes. It can also set
 `DATA` and `session` on the `request`.
 
 
-### `integration.AdminIntegrationTestCase`
+### `integration.BaseAdminIntegrationTestCase`
 
 
-`AdminIntegrationTestCase` provides a `TestCase` to test the django admin actions
+`BaseAdminIntegrationTestCase` provides a `TestCase` to test the django admin actions
 such as `add`, `change`, `changelist` and `delete`.
-`AdminIntegrationTestCase` should be subclassed and should define two attributes:
+`BaseAdminIntegrationTestCase` should be subclassed and should define two attributes:
  - a `user_factory` to create an authenticated client;
  - a `model` to test.
 
 Example:
 ```python
-from incuna_test_utils.integration import AdminIntegrationTestCase
+from incuna_test_utils.integration import BaseAdminIntegrationTestCase
 
 
-class TestUserAdmin(AdminIntegrationTestCase):
+class TestUserAdmin(BaseAdminIntegrationTestCase):
     user_factory = factories.UserFactory
     model = ModelToTest
 
