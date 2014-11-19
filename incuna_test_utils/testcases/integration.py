@@ -1,8 +1,12 @@
+from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.test import TestCase
 
 from .request import BaseRequestTestCase
+
+
+User = get_user_model()
 
 
 class BaseAdminIntegrationTestCase(TestCase):
@@ -19,7 +23,7 @@ class BaseAdminIntegrationTestCase(TestCase):
         """Create a user and authenticate it on the client."""
         admin_user = self.user_factory.create(is_active=True, is_staff=True)
         logged_in = self.client.login(
-            username=admin_user.username,
+            username=getattr(admin_user, User.USERNAME_FIELD),
             password=admin_user.raw_password,
         )
         self.assertTrue(logged_in)
