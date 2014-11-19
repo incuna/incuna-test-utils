@@ -9,10 +9,12 @@ class AdminIntegrationTestCase(BaseAdminIntegrationTestCase):
     model = User
 
     def setUp(self):
+        """Mock the client to test what it gets called with."""
         super(AdminIntegrationTestCase, self).setUp()
         self.client.get = mock.MagicMock()
 
     def test_get_url_name(self):
+        """Assert url name generated is correct."""
         action = 'cleaning'
         url_name = self.get_url_name(action)
         expected = 'admin:tests_user_cleaning'
@@ -20,14 +22,17 @@ class AdminIntegrationTestCase(BaseAdminIntegrationTestCase):
         self.assertEqual(url_name, expected)
 
     def test_get_admin_add_page(self):
+        """Assert the right page is called when adding a record."""
         self.get_admin_add_page()
         self.client.get.assert_called_with('/admin/tests/user/add/')
 
     def test_get_admin_changelist_page(self):
+        """Assert the right page is called when listing records."""
         self.get_admin_changelist_page()
         self.client.get.assert_called_with('/admin/tests/user/')
 
     def test_get_admin_change_page(self):
+        """Assert the right page is called when changing a record."""
         user = self.user_factory.create()
 
         self.get_admin_change_page(user)
@@ -35,6 +40,7 @@ class AdminIntegrationTestCase(BaseAdminIntegrationTestCase):
         self.client.get.assert_called_with(expected)
 
     def test_get_admin_delete_page(self):
+        """Assert the right page is called when deleting a record."""
         user = self.user_factory.create()
 
         self.get_admin_delete_page(user)
