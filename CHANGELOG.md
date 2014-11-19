@@ -1,7 +1,7 @@
 Changelog for incuna-test-utils
 ============================
 
-Upcoming
+v5.2.0
 --------
 * Add `AdminIntegrationTestCase`
 
