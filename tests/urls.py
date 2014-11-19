@@ -2,6 +2,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from . import views
+from incuna_test_utils.compat import DJANGO_LT_17
+
+
+if DJANGO_LT_17:
+    admin.autodiscover()
 
 
 urlpatterns = [
