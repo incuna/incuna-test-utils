@@ -1,4 +1,5 @@
 import mock
+
 from incuna_test_utils.testcases.integration import BaseAdminIntegrationTestCase
 from tests.factories import UserFactory
 from tests.models import User

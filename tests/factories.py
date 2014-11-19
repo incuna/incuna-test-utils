@@ -1,5 +1,5 @@
-from django.contrib.auth.models import User
 import factory
+from django.contrib.auth.models import User
 
 
 class UserFactory(factory.DjangoModelFactory):

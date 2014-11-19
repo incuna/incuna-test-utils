@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.exceptions import ImproperlyConfigured
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory, TestCase
 
 
 class DummyStorage:
@@ -73,7 +73,15 @@ class BaseRequestTestCase(TestCase):
         middleware.process_request(request)
         request.session.save()
 
-    def create_request(self, method='get', url='/', user=None, auth=True, add_session=False, **kwargs):
+    def create_request(
+        self,
+        method='get',
+        url='/',
+        user=None,
+        auth=True,
+        add_session=False,
+        **kwargs
+    ):
         if user is None:
             user = self.create_user(auth=auth)
         request = getattr(self.request_factory(), method)(url, **kwargs)

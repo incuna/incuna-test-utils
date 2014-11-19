@@ -1,9 +1,9 @@
-from django.contrib.auth.models import AnonymousUser, User
+import pytest
 from django.contrib import messages
+from django.contrib.auth.models import AnonymousUser, User
 from django.contrib.sessions.backends.base import SessionBase
 from django.core.exceptions import ImproperlyConfigured
 from django.views.generic import View
-import pytest
 
 from incuna_test_utils.testcases.request import (
     BaseRequestTestCase,
