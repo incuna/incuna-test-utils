@@ -29,21 +29,22 @@ class BaseAdminIntegrationTestCase(TestCase):
             action=action,
         )
 
+    def get_admin_page(self, page, obj=None):
+        args = (obj.pk,) if obj is not None else ()
+        url_name = self.get_url_name(page)
+        return self.client.get(reverse(url_name, args=args))
+
     def get_admin_add_page(self):
-        url_name = self.get_url_name('add')
-        return self.client.get(reverse(url_name))
+        return self.get_admin_page('add')
 
     def get_admin_changelist_page(self):
-        url_name = self.get_url_name('changelist')
-        return self.client.get(reverse(url_name))
+        return self.get_admin_page('changelist')
 
     def get_admin_change_page(self, obj):
-        url_name = self.get_url_name('change')
-        return self.client.get(reverse(url_name, args=[obj.pk]))
+        return self.get_admin_page('change', obj)
 
     def get_admin_delete_page(self, obj):
-        url_name = self.get_url_name('delete')
-        return self.client.get(reverse(url_name, args=[obj.pk]))
+        return self.get_admin_page('delete', obj)
 
 
 class BaseIntegrationTestCase(BaseRequestTestCase):
