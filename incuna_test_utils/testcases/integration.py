@@ -29,8 +29,7 @@ class BaseAdminIntegrationTestCase(TestCase):
             action=action,
         )
 
-    def get_admin_page(self, page, obj=None):
-        args = (obj.pk,) if obj is not None else ()
+    def get_admin_page(self, page, args=None):
         url_name = self.get_url_name(page)
         return self.client.get(reverse(url_name, args=args))
 
@@ -41,10 +40,10 @@ class BaseAdminIntegrationTestCase(TestCase):
         return self.get_admin_page('changelist')
 
     def get_admin_change_page(self, obj):
-        return self.get_admin_page('change', obj)
+        return self.get_admin_page('change', (obj.pk,))
 
     def get_admin_delete_page(self, obj):
-        return self.get_admin_page('delete', obj)
+        return self.get_admin_page('delete', (obj.pk,))
 
 
 class BaseIntegrationTestCase(BaseRequestTestCase):
