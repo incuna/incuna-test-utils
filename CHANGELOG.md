@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+Upcoming
+--------
+* Allow login username to use `USERNAME_FIELD`
+
 v5.2.0
 --------
 * Add `AdminIntegrationTestCase`
