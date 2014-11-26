@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 
-version = '5.3.0'
+version = '6.0.0'
 
 
 setup(

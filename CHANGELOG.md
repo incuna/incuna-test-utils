@@ -1,9 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
-Upcoming
---------
+v6.0.0
+------
 * Remove non-standard name attribute on `BaseUserFactory`
+* Add `BaseAdminUserFactory`
 
 v5.3.0
 ------
