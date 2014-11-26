@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+Upcoming
+--------
+* Remove non-standard name attribute on `BaseUserFactory`
+
 v5.3.0
 ------
 * Allow login username to use `USERNAME_FIELD`
