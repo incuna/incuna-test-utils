@@ -17,7 +17,7 @@ class BaseAdminIntegrationTestCase(TestCase):
     """
     def setUp(self):
         """Create a user and authenticate it on the client."""
-        admin_user = self.user_factory.create(is_active=True, is_staff=True)
+        admin_user = self.user_factory.create()
         logged_in = self.client.login(
             username=admin_user.get_username(),
             password=admin_user.raw_password,
