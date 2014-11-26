@@ -107,14 +107,22 @@ These are found in `incuna_test_utils.factories`. They require
 ### `user.BaseUserFactory`
 
 
-This defines a simple factory with `email` and `name` attributes. This can be
-used with a custom User model that has these fields:
+This defines a simple factory with an `email` attribute. This can be used with
+a custom User model that has these fields:
 
 ```python
     class UserFactory(BaseUserFactory):
         class Meta:
             model = User
 ```
+
+
+### `user.BaseAdminUserFactory`
+
+
+`BaseAdminUserFactory` defines a user with `is_active`, `is_staff` and
+`is_superuser` to `True`. This factory also defines a post hook which
+sets a default password accessible with `raw_password`.
 
 
 ### `feincms_page.PageFactory`

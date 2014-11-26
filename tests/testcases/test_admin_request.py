@@ -1,12 +1,12 @@
 import mock
 
 from incuna_test_utils.testcases.integration import BaseAdminIntegrationTestCase
-from tests.factories import UserFactory
+from tests.factories import AdminFactory
 from tests.models import User
 
 
 class AdminIntegrationTestCase(BaseAdminIntegrationTestCase):
-    user_factory = UserFactory
+    user_factory = AdminFactory
     model = User
 
     def setUp(self):
