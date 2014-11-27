@@ -12,7 +12,7 @@ v5.3.0
 
 v5.2.0
 ------
-* Add `AdminIntegrationTestCase`
+* Add `BaseAdminIntegrationTestCase`
 
 v5.1.0
 ------
