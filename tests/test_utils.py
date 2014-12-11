@@ -1,14 +1,14 @@
 from incuna_test_utils import utils
 
 
-class Parent:
+class Parent(object):
     def method(self):
         return {'foo'}
 
 
-class Mixin:
+class Mixin(object):
     def method(self):
-        data = super().method()
+        data = super(Mixin, self).method()
         data.add('bar')
         return data
 

@@ -1,5 +1,8 @@
 from contextlib import contextmanager
-from unittest.mock import patch
+try:
+    from unittest.mock import patch
+except ImportError:
+    from mock import patch
 
 
 def next_mro_class(cls, current):
