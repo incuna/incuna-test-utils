@@ -30,10 +30,11 @@ def test_isolate_method():
     instance = Child()
     assert instance.method() == {'foo', 'bar'}
 
-    kwargs = {
-        'mixin': Mixin,
-        'method_name': 'method',
-        'parent_return_value': set(),
-    }
-    with utils.isolate_method(Child, **kwargs) as method:
+    isolate_mixin_method = utils.isolate_method(
+        Child,
+        mixin=Mixin,
+        method_name='method',
+        parent_return_value=set(),
+    )
+    with isolate_mixin_method as method:
         assert method(instance) == {'bar'}
