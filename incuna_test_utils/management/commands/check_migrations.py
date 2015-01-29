@@ -8,6 +8,12 @@ from django.db.migrations.state import ProjectState
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        """
+        Detect model changes without migrations.
+
+        The implementation here is a very stripped down version of the
+        `migrate` management command in django core.
+        """
         connection = connections[DEFAULT_DB_ALIAS]
         executor = MigrationExecutor(connection)
         autodetector = MigrationAutodetector(
