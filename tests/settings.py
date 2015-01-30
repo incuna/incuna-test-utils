@@ -7,6 +7,8 @@ DATABASES = {
     ),
 }
 INSTALLED_APPS = (
+    'incuna_test_utils',
+
     'tests',
 
     'feincms.module.page',
