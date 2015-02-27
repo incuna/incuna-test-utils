@@ -136,8 +136,8 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         # Build a verbose error message in case we need it.
         plural = '' if count == 1 else 's'
         message = (
-            'Expected {count} instance{plural} of {needle}, but found '
-            + '{actual_count}, in {haystack}'
+            'Expected {count} instance{plural} of {needle}, but found ' +
+            '{actual_count}, in {haystack}'
         )
         return message.format(
             count=count,
