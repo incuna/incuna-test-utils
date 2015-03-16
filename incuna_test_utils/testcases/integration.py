@@ -65,6 +65,37 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     Must be subclassed with the following attributes in order to work:
     * user_factory
     * view (class-based or function-based view)
+
+    The helper methods available are:
+    * access_view - DRYes out some commonly used code that gets a response from self.view.
+    * render_to_str - take a response and turn it into text, usually HTML.
+    * access_view_and_render_response - both!
+    * render_view_and_assert_content - access the view, render the response to text, then
+      call assert_presence_multiple on the result and a dictionary of assert arguments.
+    * render_view_and_assert_content_counts - access the view, render the response to
+      text, then call assert_count_multiple on the result and a dictionary of assert
+      arguments.
+
+    The intent behind these helpers is to streamline typical view access code and allow
+    for very easy handwaving of the code that you'll typically write in your view tests
+    so that the integration test as-written focuses on the content assertions you wish
+    to make. They accept keyword arguments to allow some flexibility in how the view is
+    accessed.
+
+    BaseIntegrationTestCase ships with two different kinds of asserts:
+    * assert_presence
+    * assert_count
+
+    Both are similar, but assert_count is stricter. assert_presence asserts that an item
+    does or doesn't occur in another item, whereas assert_count asserts the exact number
+    of occurrences (which can be zero). There are also assert_[thing]_multiple methods
+    which accept a dictionary of {item_to_assert: count/presence} items, essentially
+    calling the assert method once per entry in the dictionary and passing those values
+    in as arguments.
+
+    Each assertion outputs a verbose error message if it fails, which contains the
+    data being asserted against. This takes up lots of space in the terminal, but
+    saves having to add print statements every time the test fails.
     """
 
     def access_view(self, *args, **kwargs):
@@ -174,7 +205,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
 
     def assert_presence(self, needle, haystack, is_present):
         """
-        Assert that 'needle' occurs at least once in 'haystack' iff `is_present` is true.
+        Assert that 'needle' occurs at least once in 'haystack' iff `is_present` is True.
 
         Outputs a verbose error message when it fails.
         """
@@ -184,3 +215,65 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
         message = self._assert_presence_message(*message_args)
 
         self.assertEqual(is_present, contains, message)
+
+    def assert_presence_multiple(self, content_to_search, **content_assertions):
+        """
+        A helper method to do lots of assert_presence() calls at once.
+
+        Accepts a string, content_to_search, which is the text to be checked,
+        and a dictionary of {content_string: presence} items, where
+        'content_string' is any string, and 'presence' is True if and only if the
+        'content_string' is expected to be in the text, and False otherwise.
+        """
+        for content_string, presence in content_assertions.items():
+            self.assert_presence(content_string, content_to_search, presence)
+
+    def assert_count_multiple(self, content_to_search, **content_assertions):
+        """
+        A helper method to do lots of assert_count() calls at once.
+
+        Accepts a string, content_to_search, which is the text to be checked,
+        and a dictionary of {content_string: count} items, where
+        'content_string' is any string, and 'count' is the expected number of
+        instances of that string in content_to_search.
+        """
+        for content_string, count in content_assertions.items():
+            self.assert_count(content_string, content_to_search, count)
+
+    def render_view_and_assert_content(self, content_assertions, **view_kwargs):
+        """
+        A helper method that streamlines trivial integration tests.
+
+        This method accesses the test class's view, asserts that it returns
+        a response with status (by default) 200, and makes the specified
+        assertions about the HTML content of the response.  To assert a
+        response status other than 200, pass `expected_status=[code]` in
+        view_kwargs.
+
+        Accepts a dictionary of {content_string: presence} items, where
+        'content_string' is any string, and 'presence' is True if and only if that string
+        is expected in the rendered HTML response, and False otherwise.
+
+        If the view needs a `pk`, put that in `view_kwargs`.
+        """
+        page_content = self.access_view_and_render_response(**view_kwargs)
+        self.assert_presence_multiple(page_content, **content_assertions)
+
+    def render_view_and_assert_content_counts(self, content_assertions, **view_kwargs):
+        """
+        A helper method that streamlines trivial integration tests.
+
+        This method accesses the test class's view, asserts that it returns
+        a response with status (by default) 200, and makes the specified
+        assertions about the HTML content of the response.  To assert a
+        response status other than 200, pass `expected_status=[code]` in
+        view_kwargs.
+
+        Accepts a dictionary of {content_string: count} items, where
+        'content_string' is any string, and 'count' is the expected number of
+        instances of that string in the rendered HTML response.
+
+        If the view needs a `pk`, put that in `view_kwargs`.
+        """
+        page_content = self.access_view_and_render_response(**view_kwargs)
+        self.assert_count_multiple(page_content, **content_assertions)
