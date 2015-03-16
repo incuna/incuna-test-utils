@@ -165,7 +165,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     @staticmethod
     def _assert_count_message(needle, haystack, count, actual_count):
         """Build a verbose error message in case we need it."""
-        plural = u'' if count == 1 else u's'
+        plural = '' if count == 1 else 's'
         message = (
             u'Expected {count} instance{plural} of {needle}, but found ' +
             u'{actual_count}, in {haystack}'
