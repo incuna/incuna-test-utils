@@ -165,10 +165,10 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     @staticmethod
     def _assert_count_message(needle, haystack, count, actual_count):
         """Build a verbose error message in case we need it."""
-        plural = '' if count == 1 else 's'
+        plural = u'' if count == 1 else u's'
         message = (
-            'Expected {count} instance{plural} of {needle}, but found ' +
-            '{actual_count}, in {haystack}'
+            u'Expected {count} instance{plural} of {needle}, but found ' +
+            u'{actual_count}, in {haystack}'
         )
         return message.format(
             count=count,
@@ -182,7 +182,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     def _assert_presence_message(needle, haystack, is_present):
         """Build a verbose error message in case we need it."""
         contradiction = '' if is_present else 'not '  # Note the trailing space in 'not '!
-        message = 'Expected {contradiction}to find {needle} in {haystack}'
+        message = u'Expected {contradiction}to find {needle} in {haystack}'
         return message.format(
             contradiction=contradiction,
             needle=needle,
