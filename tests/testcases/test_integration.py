@@ -70,6 +70,20 @@ class TestIntegration:
         with pytest.raises(AssertionError):
             simple_integration.assert_count(needle, haystack, count)
 
+    def test_assert_presence(self, simple_integration):
+        haystack = [1, 1, 3, 1, 2, 4]
+        needle = 1
+        is_present = True
+        simple_integration.assert_presence(needle, haystack, is_present)
+
+    def test_assert_presence_fail(self, simple_integration):
+        haystack = [1, 1, 3, 1, 2, 4]
+        needle = 1
+        is_present = False
+
+        with pytest.raises(AssertionError):
+            simple_integration.assert_presence(needle, haystack, is_present)
+
     def test__assert_count_message(self, simple_integration):
         haystack = [1, 1, 3, 1, 2, 4]
         needle = 1
@@ -96,6 +110,32 @@ class TestIntegration:
 
         message_args = (needle, haystack, count, actual_count)
         message = simple_integration._assert_count_message(*message_args)
+        assert message == expected_message
+
+    def test__assert_presence_message(self, simple_integration):
+        haystack = [1, 1, 3, 1, 2, 4]
+        needle = 1
+        presence = False
+
+        expected_message_args = (needle, haystack)
+        expected_message = 'Expected not to find {} in {}'
+        expected_message = expected_message.format(*expected_message_args)
+
+        message_args = (needle, haystack, presence)
+        message = simple_integration._assert_presence_message(*message_args)
+        assert message == expected_message
+
+    def test__assert_presence_message_present(self, simple_integration):
+        haystack = [1, 1, 3, 1, 2, 4]
+        needle = 18
+        presence = True
+
+        expected_message_args = (needle, haystack)
+        expected_message = 'Expected to find {} in {}'
+        expected_message = expected_message.format(*expected_message_args)
+
+        message_args = (needle, haystack, presence)
+        message = simple_integration._assert_presence_message(*message_args)
         assert message == expected_message
 
     def test_render_to_str(self, template_view_integration):
