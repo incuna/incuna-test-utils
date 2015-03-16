@@ -181,7 +181,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
     @staticmethod
     def _assert_presence_message(needle, haystack, is_present):
         """Build a verbose error message in case we need it."""
-        contradiction = '' if is_present else 'not '
+        contradiction = '' if is_present else 'not '  # Note the trailing space in 'not '!
         message = 'Expected {contradiction}to find {needle} in {haystack}'
         return message.format(
             contradiction=contradiction,
