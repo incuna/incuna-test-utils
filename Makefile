@@ -10,3 +10,7 @@ release:
 test:
 	@py.test --cov-report term-missing --cov incuna_test_utils tests
 	@flake8 .
+
+install:
+	pip install -r test_requirements.txt
+	pip install -r test_local_requirements.txt
