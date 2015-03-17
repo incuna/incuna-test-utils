@@ -132,9 +132,8 @@ class TestIntegration:
         needle = 'a'
         presence = False
 
-        expected_message_args = (needle, haystack)
         expected_message = 'Expected not to find {} in {}'
-        expected_message = expected_message.format(*expected_message_args)
+        expected_message = expected_message.format(needle, haystack)
 
         message_args = (needle, haystack, presence)
         message = simple_integration._assert_presence_message(*message_args)
@@ -145,9 +144,8 @@ class TestIntegration:
         needle = '18'
         presence = True
 
-        expected_message_args = (needle, haystack)
         expected_message = 'Expected to find {} in {}'
-        expected_message = expected_message.format(*expected_message_args)
+        expected_message = expected_message.format(needle, haystack)
 
         message_args = (needle, haystack, presence)
         message = simple_integration._assert_presence_message(*message_args)
