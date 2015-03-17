@@ -18,3 +18,12 @@ install:
   - pip install -r requirements.txt
   - pip install --upgrade $DJANGO
   - pip install --upgrade $DRF
+deploy:
+  provider: pypi
+  user: incuna
+  on:
+    condition: $DJANGO='django>=1.7,<1.8' $DRF='djangorestframework>=3.0.5,<3.1'
+    tags: true
+  password:
+    secure: k27h5zxaRTrNhYTT7AtkfVsok95CWQLVNqwbLxibyEnqxgK+aDbVMf4HPJapD2JYl7/OGgNX9Zbe9qajRLUgwzwI5adMyHbIxUxHEYil1Cx7hcVvKfH1EZzkItAKPOoyQe2YrlWa0t3NRM+55A4lHxLJnd16+3EA9yoakKMxRNU=
+  distributions: sdist bdist_wheel
