@@ -16,5 +16,5 @@ env:
 install:
   - psql -c 'CREATE DATABASE test_utils' -U postgres;
   - pip install -r test_requirements.txt
-  - pip install $DJANGO
-  - pip install $DRF
+  - pip install --upgrade $DJANGO
+  - pip install --upgrade $DRF
