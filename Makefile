@@ -12,5 +12,4 @@ test:
 	@flake8 .
 
 install:
-	pip install -r test_requirements.txt
-	pip install -r test_local_requirements.txt
+	pip install -r requirements.txt
