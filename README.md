@@ -80,8 +80,13 @@ and `response.context_data`. If a `request` is not provided, `render_to_str` use
   * `access_view_and_render_response` wraps `access_view` and `render_to_str`.
 It also checks the `response.status_code` is as expected. The default
 `expected_status` is `200` (`HTTP_OK`).
+  * `assert_presence` checks that an item does or doesn't appear in a container.
   * `assert_count` checks that an item appears in a container an expected number
 of times.
+  * `assert_presence_multiple` and `assert_count_multiple` run one or more assertions in
+  a single method call.
+  * `render_view_and_assert_content` and `render_view_and_assert_content_counts` combine
+  a call to `access_view_and_render_response` with a multiple-assert call on the result.
 
 
 ### `api_request.BaseAPIRequestTestCase`
