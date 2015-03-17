@@ -205,7 +205,7 @@ class BaseIntegrationTestCase(BaseRequestTestCase):
 
     def assert_presence(self, needle, haystack, is_present):
         """
-        Assert that 'needle' occurs at least once in 'haystack' iff `is_present` is True.
+        Assert that 'needle' occurs in 'haystack' if and only if `is_present` is True.
 
         Outputs a verbose error message when it fails.
         """
