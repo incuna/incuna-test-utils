@@ -15,6 +15,6 @@ env:
     - DJANGO='django>=1.6,<1.7' DRF='djangorestframework>=2.4.2,<3'
 install:
   - psql -c 'CREATE DATABASE test_utils' -U postgres;
-  - pip install -r test_requirements.txt
+  - pip install -r requirements.txt
   - pip install --upgrade $DJANGO
   - pip install --upgrade $DRF
