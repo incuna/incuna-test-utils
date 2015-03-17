@@ -1,6 +1,13 @@
 Changelog for incuna-test-utils
 ============================
 
+v6.1.0
+------
+* Add `assert_presence` to `BaseIntegrationTestCase`.
+* Add multiple-assert methods that accept a dictionary of assertions to make, and
+  methods that combine accessing the view, rendering it, and asserting the result.
+* Add `make install` command to perform local installation of requirements.
+
 v6.0.0
 ------
 * Remove non-standard name attribute on `BaseUserFactory`
