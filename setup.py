@@ -14,7 +14,9 @@ setup(
     author='Incuna',
     author_email='admin@incuna.com',
     url='https://github.com/incuna/incuna-test-utils/',
-    install_requires=[],
+    install_requires=[
+        'Pillow==2.8.1',
+    ],
     zip_safe=False,
     license='BSD',
     classifiers=[
