@@ -59,9 +59,8 @@ def uploadable_file():
     """
     Return an object that can be uploaded to a FileField via a Django form.
 
-    Uploading files in a form in a test can be a pain.  One way that works well is to
-    use a `factory.django.FileField` to create a fully featured Django file object, then
-    upload that via `request.FILES`.  This method returns the file object.
+    Uploading files in a form in a test can be a pain. This method returns a file object
+    that can be easily uploaded via request.FILES.
 
     Example usage:
 
@@ -74,11 +73,5 @@ def uploadable_file():
     `data`.  The two are not mutually exclusive, but the file being uploaded must be
     passed in using `files`, which correlates to `request.FILES`. Other form data can be
     passed in using `data` as normal.
-
-    Requires factory_boy>=v2.5.0.
     """
-    class FileFactory(factory.StubFactory):
-        file = LocalFileField()
-
-    model = FileFactory.stub()
-    return model.file.file
+    return open('incuna_test_utils/factories/images/image.png', mode='rb')
