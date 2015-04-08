@@ -5,6 +5,9 @@ except ImportError:
     from mock import patch
 
 
+TEST_SERVER = 'http://testserver'
+
+
 def next_mro_class(cls, current):
     """Find the next class in `cls.mro()` after `current`."""
     mro = cls.mro()
