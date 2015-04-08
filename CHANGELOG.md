@@ -1,6 +1,15 @@
 Changelog for incuna-test-utils
 ============================
 
+Upcoming
+------
+* Add `factories.images` module with usefuls for handling images in tests.
+  * Provide a `simple_png()` method that creates a 1x1 black .png file in memory.
+  * Provide two factory field classes that help provide data for FileFields and
+    ImageFields.
+  * Provide an `uploadable_file()` method that creates something you can upload to a
+    form in tests.
+
 v6.1.0
 ------
 * Add `assert_presence` to `BaseIntegrationTestCase`.

@@ -4,6 +4,13 @@ from setuptools import find_packages, setup
 version = '6.1.0'
 
 
+extras_require = {
+    'images': [
+        'Pillow>=2.8.1,<2.9',
+    ],
+}
+
+
 setup(
     name='incuna-test-utils',
     packages=find_packages(),
@@ -14,9 +21,8 @@ setup(
     author='Incuna',
     author_email='admin@incuna.com',
     url='https://github.com/incuna/incuna-test-utils/',
-    install_requires=[
-        'Pillow==2.8.1',
-    ],
+    install_requires=[],
+    extras_require=extras_require,
     zip_safe=False,
     license='BSD',
     classifiers=[
