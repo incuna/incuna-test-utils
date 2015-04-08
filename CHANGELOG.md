@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v6.2.5
+------
+* Bugfix: Fix MANIFEST.in to include missing files.
+
 v6.2.4
 ------
 * Bugfix: Fix a naming conflict between packages.
