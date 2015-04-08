@@ -1,6 +1,11 @@
 Changelog for incuna-test-utils
 ============================
 
+Upcoming
+------
+* Bugfix: Ensure the methods and factory fields in `factories.images` all output Django
+  File objects.
+
 v6.2.0
 ------
 * Add `factories.images` module with usefuls for handling images in tests.

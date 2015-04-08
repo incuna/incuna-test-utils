@@ -1,9 +1,15 @@
+import os
 from io import BytesIO
 
 import factory
+from django.core.files import File
 from PIL import Image
 
 from ..utils import TEST_SERVER
+
+
+directory = os.path.dirname(__file__)
+IMAGE_PATH = os.path.join(directory, 'images/image.png')
 
 
 def simple_png():
@@ -32,7 +38,7 @@ class LocalFileField(factory.django.FileField):
     """
     def __init__(self, *args, **kwargs):
         defaults = {
-            'from_path': 'incuna_test_utils/factories/images/image.png',
+            'from_path': IMAGE_PATH,
         }
         defaults.update(kwargs)
         super(LocalFileField, self).__init__(*args, **defaults)
@@ -49,9 +55,9 @@ class SimplePngFileField(factory.LazyAttribute):
     """
     def __init__(self, method=None, *args, **kwargs):
         if not method:
-            def png(a):
-                return simple_png()
-            method = png
+            def png_file(a):
+                return File(simple_png())
+            method = png_file
         super(SimplePngFileField, self).__init__(method, *args, **kwargs)
 
 
@@ -74,4 +80,4 @@ def uploadable_file():
     passed in using `files`, which correlates to `request.FILES`. Other form data can be
     passed in using `data` as normal.
     """
-    return open('incuna_test_utils/factories/images/image.png', mode='rb')
+    return File(open(IMAGE_PATH, mode='rb'))
