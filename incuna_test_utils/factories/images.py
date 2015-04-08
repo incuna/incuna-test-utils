@@ -9,7 +9,8 @@ from ..utils import TEST_SERVER
 
 
 directory = os.path.dirname(__file__)
-IMAGE_PATH = os.path.join(directory, 'files/image.png')
+SHORT_FILE_PATH = 'files/image.png'
+IMAGE_PATH = os.path.join(directory, SHORT_FILE_PATH)
 
 
 def simple_png():
@@ -80,4 +81,6 @@ def uploadable_file():
     passed in using `files`, which correlates to `request.FILES`. Other form data can be
     passed in using `data` as normal.
     """
-    return File(open(IMAGE_PATH, mode='rb'))
+    upload = File(open(IMAGE_PATH, mode='rb'))
+    upload.name = SHORT_FILE_PATH  # To avoid 'This name is too long' errors.
+    return upload
