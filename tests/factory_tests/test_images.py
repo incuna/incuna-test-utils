@@ -15,9 +15,9 @@ except NameError:
 
 def test_local_file_field():
     class FileFactory(factory.StubFactory):
-        file = images.LocalFileField()
+        image = images.LocalFileField()
 
-    built_file = FileFactory.build().file
+    built_file = FileFactory.build().image
     assert isinstance(built_file, File)
     assert isinstance(built_file.file, FILE_TYPE)
 
@@ -26,10 +26,12 @@ def test_simple_png_file_field():
     class FileFactory(factory.StubFactory):
         image = images.SimplePngFileField()
 
-    image = FileFactory.build().image
-    assert isinstance(image, BytesIO)
+    built_file = FileFactory.build().image
+    assert isinstance(built_file, File)
+    assert isinstance(built_file.file, BytesIO)
 
 
 def test_uploadable_file():
     built_file = images.uploadable_file()
-    assert isinstance(built_file, FILE_TYPE)
+    assert isinstance(built_file, File)
+    assert isinstance(built_file.file, FILE_TYPE)
