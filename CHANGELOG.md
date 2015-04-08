@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v6.2.4
+------
+* Bugfix: Fix a naming conflict between packages.
+
 v6.2.3
 ------
 * Bugfix: Add a missing `__init__.py`.
