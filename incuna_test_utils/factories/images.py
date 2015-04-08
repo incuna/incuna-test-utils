@@ -3,8 +3,7 @@ from io import BytesIO
 import factory
 from PIL import Image
 
-
-TEST_SERVER = 'http://testserver'
+from ..utils import TEST_SERVER
 
 
 def simple_png():
