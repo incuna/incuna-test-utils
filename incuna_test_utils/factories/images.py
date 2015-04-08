@@ -9,7 +9,7 @@ from ..utils import TEST_SERVER
 
 
 directory = os.path.dirname(__file__)
-IMAGE_PATH = os.path.join(directory, 'images/image.png')
+IMAGE_PATH = os.path.join(directory, 'files/image.png')
 
 
 def simple_png():
