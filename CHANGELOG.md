@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v6.2.7
+------
+* Clean deploy to PyPI to avoid including a folder that no longer exists in the wheel.
+
 v6.2.6
 ------
 * Return a file from uploadable_file() with a short name to avoid form validation errors.

@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 
-version = '6.2.6'
+version = '6.2.7'
 
 
 extras_require = {
