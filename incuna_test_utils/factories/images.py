@@ -24,7 +24,7 @@ def simple_png():
 
 class LocalFileField(factory.django.FileField):
     """
-    A factory file field class that creates an image in memory.
+    A factory file field class that reads an image from disk.
 
     Suitable for using as a FileField or ImageField.
 
@@ -75,6 +75,8 @@ def uploadable_file():
     `data`.  The two are not mutually exclusive, but the file being uploaded must be
     passed in using `files`, which correlates to `request.FILES`. Other form data can be
     passed in using `data` as normal.
+
+    Requires factory_boy>=v2.5.0.
     """
     class FileFactory(factory.StubFactory):
         file = LocalFileField()
