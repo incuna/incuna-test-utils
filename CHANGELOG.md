@@ -1,7 +1,7 @@
 Changelog for incuna-test-utils
 ============================
 
-Upcoming
+v6.2.0
 ------
 * Add `factories.images` module with usefuls for handling images in tests.
   * Provide a `simple_png()` method that creates a 1x1 black .png file in memory.
