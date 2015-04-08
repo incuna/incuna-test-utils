@@ -6,13 +6,20 @@ from django.core.files import File
 from incuna_test_utils.factories import images
 
 
+# In Python 2 Django's File wraps the builtin `file`, but that doesn't exist in Python 3.
+try:
+    FILE_TYPE = file
+except NameError:
+    FILE_TYPE = BufferedReader
+
+
 def test_local_file_field():
     class FileFactory(factory.StubFactory):
         file = images.LocalFileField()
 
-    file = FileFactory.build().file
-    assert isinstance(file, File)
-    assert isinstance(file.file, BufferedReader)
+    built_file = FileFactory.build().file
+    assert isinstance(built_file, File)
+    assert isinstance(built_file.file, FILE_TYPE)
 
 
 def test_simple_png_file_field():
@@ -24,5 +31,5 @@ def test_simple_png_file_field():
 
 
 def test_uploadable_file():
-    file = images.uploadable_file()
-    assert isinstance(file, BufferedReader)
+    built_file = images.uploadable_file()
+    assert isinstance(built_file, FILE_TYPE)
