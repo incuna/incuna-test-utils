@@ -1,6 +1,10 @@
 Changelog for incuna-test-utils
 ============================
 
+v6.2.6
+------
+* Return a file from uploadable_file() with a short name to avoid form validation errors.
+
 v6.2.5
 ------
 * Bugfix: Fix MANIFEST.in to include missing files.
