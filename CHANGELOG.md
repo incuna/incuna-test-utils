@@ -1,13 +1,18 @@
 Changelog for incuna-test-utils
 ============================
 
+v6.3.0 (Upcoming)
+-----------------
+
+* Add `utils.field_names` helper function for model tests.
+
 v6.2.7
 ------
 * Clean deploy to PyPI to avoid including a folder that no longer exists in the wheel.
 
 v6.2.6
 ------
-* Return a file from uploadable_file() with a short name to avoid form validation errors.
+* Return a file from `uploadable_file()` with a short name to avoid form validation errors.
 
 v6.2.5
 ------
@@ -121,7 +126,7 @@ v1.1.1
 ------
 
 * Fix URLTestCase
-    * Check for cls attribute on resolved_view, not view
+    * Check for cls attribute on `resolved_view`, not view
 
 v1.1.0
 ------
@@ -134,7 +139,7 @@ v1.1.0
 v1.0.0
 ------
 * Simplify testcases.urls
-    * Add URLTestMixin with assert_url_matches_view method
+    * Add URLTestMixin with `assert_url_matches_view` method
     * Remove URLsTestCaseREST, URLsTestCaseViewMethod and URLsTestCase
     * Remove URLsMixinREST, URLsMixinForViewMethod, URLsMixin and URLsMixinBase
 

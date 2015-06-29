@@ -1,5 +1,7 @@
 from incuna_test_utils import utils
 
+from .models import User
+
 
 class Parent(object):
     def method(self):
@@ -38,3 +40,8 @@ def test_isolate_method():
     )
     with isolate_mixin_method as method:
         assert method(instance) == {'bar'}
+
+
+def test_field_names():
+    fields = utils.field_names(User)
+    assert fields == {'id', 'email', 'name'}
