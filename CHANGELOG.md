@@ -1,8 +1,8 @@
 Changelog for incuna-test-utils
 ============================
 
-v6.3.0 (Upcoming)
------------------
+v6.3.0
+------
 
 * Add `utils.field_names` helper function for model tests.
 
