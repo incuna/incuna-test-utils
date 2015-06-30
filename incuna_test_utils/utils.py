@@ -28,3 +28,12 @@ def isolate_method(cls, mixin, method_name, parent_return_value=None):
     with patch(parent_method_path) as method:
         method.return_value = parent_return_value
         yield getattr(mixin, method_name)
+
+
+def field_names(model):
+    """Return a set of all field names for a model."""
+    try:
+        fields = model._meta.get_fields()
+    except AttributeError:
+        return set(model._meta.get_all_field_names())
+    return {field.name for field in fields}
