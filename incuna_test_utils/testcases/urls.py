@@ -1,3 +1,5 @@
+import inspect
+
 from django.core.urlresolvers import resolve, reverse
 from django.test import TestCase
 
@@ -26,6 +28,12 @@ class URLTestMixin(object):
             self.assertEqual(resolved_view.cls, view)
         else:
             self.assertEqual(resolved_view.__name__, view.__name__)
+
+        message = 'Resolved view `{}` is a class. Did you forget `.as_view()`?'
+        self.assertFalse(
+            inspect.isclass(resolved_view),
+            message.format(resolved_view),
+        )
 
 
 class URLTestCase(URLTestMixin, TestCase):
