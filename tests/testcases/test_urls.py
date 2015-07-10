@@ -1,3 +1,5 @@
+import pytest
+
 from incuna_test_utils.testcases.urls import URLTestCase
 
 from .. import views
@@ -24,3 +26,11 @@ class TestURLTestCase(URLTestCase):
             expected_url='/bar/',
             url_name='api-view',
         )
+
+    def test_assert_url_matches_view_missing_as_view(self):
+        with pytest.raises(AssertionError):
+            self.assert_url_matches_view(
+                view=views.MyAPIView,
+                expected_url='/spam/',
+                url_name='missing-as-view',
+            )

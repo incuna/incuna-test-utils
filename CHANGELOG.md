@@ -1,6 +1,11 @@
 Changelog for incuna-test-utils
 ============================
 
+v6.3.1
+------
+
+* Ensure `assert_url_matches_view` fails if `.as_view()` has been forgotten.
+
 v6.3.0
 ------
 
