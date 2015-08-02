@@ -51,7 +51,7 @@ such as `add`, `change`, `changelist` and `delete`.
 
 Example:
 ```python
-from incuna_test_utils.integration import BaseAdminIntegrationTestCase
+from incuna_test_utils.testcases.integration import BaseAdminIntegrationTestCase
 
 
 class TestUserAdmin(BaseAdminIntegrationTestCase):
