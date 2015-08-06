@@ -77,6 +77,9 @@ def function_view(request):
 class RequestTestCaseFunctionView(BaseRequestTestCase):
     view = function_view
 
+    def test_call_view(self):
+        assert self.call_view == function_view
+
     def test_get_view(self):
         view = self.get_view()
         assert view == function_view
@@ -90,6 +93,9 @@ class ClassView(View):
 
 class RequestTestCaseClassView(BaseRequestTestCase):
     view = ClassView
+
+    def test_call_view(self):
+        assert self.call_view == function_view
 
     def test_get_view(self):
         view = self.get_view()

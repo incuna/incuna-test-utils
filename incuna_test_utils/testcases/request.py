@@ -30,6 +30,11 @@ class BaseRequestTestCase(TestCase):
 
     request_factory = RequestFactory
 
+    @property
+    def call_view(self):
+        """Call the attached view function or class."""
+        return self.get_view()
+
     @classmethod
     def get_view(cls):
         """
