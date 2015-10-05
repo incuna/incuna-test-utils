@@ -1,0 +1,12 @@
+{
+    "description": "Information about a user",
+    "url": "/users/<pk>",
+    "OK": {
+        "status": 200,
+        "response_data":  {
+            "url": "http://localhost:8000/users/1",
+            "name": "Arthur, King of the Britons",
+            "quest": "To seek the holy Grail"
+        }
+    }
+}
