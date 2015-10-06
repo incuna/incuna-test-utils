@@ -1,5 +1,6 @@
 from rest_framework.test import APIRequestFactory, force_authenticate
 
+from .api_examples import APIExampleMixin
 from .request import BaseRequestTestCase
 
 
@@ -22,3 +23,12 @@ class BaseAPIRequestTestCase(BaseRequestTestCase):
         if auth:
             force_authenticate(request, request.user)
         return request
+
+
+class BaseAPIExampleTestCase(APIExampleMixin, BaseAPIRequestTestCase):
+    SERVER_NAME = 'localhost:8000'
+
+    def create_request(self, *args, **kwargs):
+        """Set the server domain name on the new request."""
+        return super(BaseAPIExampleTestCase, self).create_request(
+            *args, SERVER_NAME=self.SERVER_NAME, **kwargs)

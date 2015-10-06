@@ -1,6 +1,11 @@
 Changelog for incuna-test-utils
 ============================
 
+v6.4.0
+------
+
+* Add `APIExampleMixin` and `BaseAPIExampleTestCase` for testing API examples.
+
 v6.3.1
 ------
 
