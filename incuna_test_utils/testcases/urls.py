@@ -27,7 +27,10 @@ class URLTestMixin(object):
         if hasattr(resolved_view, 'cls'):
             self.assertEqual(resolved_view.cls, view)
         else:
-            self.assertEqual(resolved_view.__name__, view.__name__)
+            self.assertEqual(
+                (resolved_view.__module__, resolved_view.__name__),
+                (view.__module__, view.__name__),
+            )
 
         message = 'Resolved view `{}` is a class. Did you forget `.as_view()`?'
         self.assertFalse(
