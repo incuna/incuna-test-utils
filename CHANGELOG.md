@@ -1,6 +1,11 @@
 Changelog for incuna-test-utils
 ============================
 
+v6.4.1
+------
+
+* Refactor `URLTestMixin.assert_url_matches_view` to check `view.__module__` as well as `view.__name__` when checking equality.
+
 v6.4.0
 ------
 

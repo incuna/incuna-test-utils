@@ -2,7 +2,7 @@ import pytest
 
 from incuna_test_utils.testcases.urls import URLTestCase
 
-from .. import views
+from .. import other_views, views
 
 
 class TestURLTestCase(URLTestCase):
@@ -33,4 +33,12 @@ class TestURLTestCase(URLTestCase):
                 view=views.MyAPIView,
                 expected_url='/spam/',
                 url_name='missing-as-view',
+            )
+
+    def test_assert_url_matches_view_same_name(self):
+        with pytest.raises(AssertionError):
+            self.assert_url_matches_view(
+                view=other_views.my_view,
+                expected_url='/',
+                url_name='function-view',
             )
