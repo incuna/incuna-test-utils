@@ -1,15 +1,15 @@
 -e .
 django>=1.8,<1.9
 djangorestframework>=3.0.5,<4
-dj-database-url==0.3.0
-factory-boy==2.5.1
-feincms==1.10.0
-flake8==2.4.1
-flake8-import-order==0.5.3
-mock==1.0.1
-psycopg2==2.5.3
-py==1.4.30
-pytest==2.7.2
-pytest-cov==1.8.0
-pytest-django==2.8.0
-pytest-pythonpath==0.3.0
+dj-database-url==0.4.1
+factory-boy==2.7.0
+feincms==1.11.4
+flake8==2.5.4
+flake8-import-order==0.7
+mock==2.0.0
+psycopg2==2.6.1
+py==1.4.31
+pytest==2.9.1
+pytest-cov==2.2.1
+pytest-django==2.9.1
+pytest-pythonpath==0.7
