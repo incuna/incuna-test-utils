@@ -1,8 +1,12 @@
+from unittest import skipIf, skipUnless
+
 import mock
 
 from incuna_test_utils.testcases.integration import BaseAdminIntegrationTestCase
+
 from tests.factories import AdminFactory
 from tests.models import User
+from .utils import is_django_gte_19
 
 
 class AdminIntegrationTestCase(BaseAdminIntegrationTestCase):
@@ -32,12 +36,22 @@ class AdminIntegrationTestCase(BaseAdminIntegrationTestCase):
         self.get_admin_changelist_page()
         self.client.get.assert_called_with('/admin/tests/user/')
 
+    @skipIf(is_django_gte_19(), "Django 1.9 has updated the admin url.")
     def test_get_admin_change_page(self):
         """Assert the right page is called when changing a record."""
         user = self.user_factory.create()
 
         self.get_admin_change_page(user)
         expected = '/admin/tests/user/{}/'.format(user.pk)
+        self.client.get.assert_called_with(expected)
+
+    @skipUnless(is_django_gte_19(), "Django 1.9 has updated the admin url.")
+    def test_get_admin_change_page_django_gte_19(self):
+        """Assert the right page is called when changing a record."""
+        user = self.user_factory.create()
+
+        self.get_admin_change_page(user)
+        expected = '/admin/tests/user/{}/change/'.format(user.pk)
         self.client.get.assert_called_with(expected)
 
     def test_get_admin_delete_page(self):
