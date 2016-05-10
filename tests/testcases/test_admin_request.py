@@ -3,7 +3,6 @@ from unittest import skipIf, skipUnless
 import mock
 
 from incuna_test_utils.testcases.integration import BaseAdminIntegrationTestCase
-
 from tests.factories import AdminFactory
 from tests.models import User
 from .utils import is_django_gte_19
