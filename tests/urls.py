@@ -1,12 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from incuna_test_utils.compat import DJANGO_LT_17
 from tests import views
-
-
-if DJANGO_LT_17:
-    admin.autodiscover()
 
 
 urlpatterns = [
