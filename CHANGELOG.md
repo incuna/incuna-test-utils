@@ -1,6 +1,12 @@
 Changelog for incuna-test-utils
 ============================
 
+v7.0.0 (Upcoming)
+-----------------
+
+* Remove `Django < 1.8` support.
+* Add utility to assert Django `check`.
+
 v6.4.1
 ------
 
