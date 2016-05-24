@@ -4,6 +4,10 @@ try:
 except ImportError:
     from mock import patch
 
+from django.apps import apps
+from django.core.checks import Error
+from django.core.checks.registry import registry
+
 
 TEST_SERVER = 'http://testserver'
 
@@ -37,3 +41,33 @@ def field_names(model):
     except AttributeError:
         return set(model._meta.get_all_field_names())
     return {field.name for field in fields}
+
+
+class AssertCheckErrorMixin:
+    """Add assert method to validate `check` error."""
+    def assert_check_error(self, message, error_id, check_method, hint=None, obj=None):
+        """Assert `check_method` error raises as expected."""
+        app_config = apps.get_app_config(self.app_config_name)
+        expected_error = Error(
+            msg=message,
+            hint=hint,
+            obj=obj if obj is not None else app_config,
+            id=error_id,
+        )
+
+        errors = check_method([app_config])
+        self.assertIn(expected_error, errors)
+
+    def assert_check_passes(self, check_method, msg=None):
+        """Assert check does not return an error."""
+        config = apps.get_app_config(self.app_config_name)
+        errors = check_method([config])
+        self.assertEqual(errors, [], msg=msg)
+
+    def assert_check_other_config(self, check_method, msg=None):
+        """Assert `check_method` returns `[]` for other config."""
+        self.assertEqual(check_method([]), [], msg=msg)
+
+    def assert_check_registered(self, check_method, msg=None):
+        """Assert `check_method` is registered."""
+        self.assertIn(check_method, registry.registered_checks, msg=msg)
