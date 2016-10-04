@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from itertools import chain
 try:
     from unittest.mock import patch
 except ImportError:
@@ -37,3 +38,16 @@ def field_names(model):
     except AttributeError:
         return set(model._meta.get_all_field_names())
     return {field.name for field in fields}
+
+
+def get_all_field_names(model):
+    """Return a list of all field names for a model"""
+    try:
+        fields = model._meta.get_all_field_names()
+    except AttributeError:
+        fields = list(set(chain.from_iterable(
+            (field.name, field.attname) if hasattr(field, 'attname') else (field.name,)
+            for field in model._meta.get_fields()
+            if not (field.many_to_one and field.related_model is None)
+        )))
+    return fields

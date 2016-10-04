@@ -45,3 +45,10 @@ def test_isolate_method():
 def test_field_names():
     fields = utils.field_names(User)
     assert fields == {'id', 'email', 'name'}
+
+
+def test_get_all_field_names():
+    fields = utils.get_all_field_names(User)
+    assert isinstance(fields, list)
+    # Convert to set as list could complain about ordering in equality check
+    assert set(fields) == set(['id', 'email', 'name'])
