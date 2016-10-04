@@ -55,16 +55,16 @@ def test_get_all_field_names():
 
 
 def test_get_field_by_name():
-    field = utils.get_field_by_name(User, 'email')
-    assert field[0] == User._meta.get_field('email')
-    assert not field[1]
-    assert field[2]
-    assert not field[3]
+    field, model, direct, m2m = utils.get_field_by_name(User, 'email')
+    assert field == User._meta.get_field('email')
+    assert not model
+    assert direct
+    assert not m2m
 
 
 def test_get_field_by_name_many_related():
-    field = utils.get_field_by_name(ManyRelated, 'relation')
-    assert field[0] == ManyRelated._meta.get_field('relation')
-    assert not field[1]
-    assert field[2]
-    assert field[3]
+    field, model, direct, m2m = utils.get_field_by_name(ManyRelated, 'relation')
+    assert field == ManyRelated._meta.get_field('relation')
+    assert not model
+    assert direct
+    assert m2m
