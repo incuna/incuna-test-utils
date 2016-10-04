@@ -1,6 +1,6 @@
 from incuna_test_utils import utils
 
-from .models import User, ManyRelated
+from .models import ManyRelated, User
 
 
 class Parent(object):
