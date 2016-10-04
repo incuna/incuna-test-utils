@@ -54,3 +54,18 @@ def get_all_field_names(model):
             if not (field.many_to_one and field.related_model is None)
         )))
     return fields
+
+
+def get_field_by_name(model, field_name):
+    """Returns a tuple of (field, model, direct, m2m)"""
+    try:
+        field_info = model._meta.get_field_by_name(field_name)
+    except AttributeError:
+        field = model._meta.get_field(field_name)
+        field_info = (
+            field,
+            field.model,
+            not field.auto_created or field.concrete,
+            field.many_to_many,
+        )
+    return field_info

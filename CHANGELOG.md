@@ -1,6 +1,11 @@
 Changelog for incuna-test-utils
 ============================
 
+upcoming
+--------
+
+* Add additional deprecated method `get_field_by_name`
+
 v6.5.0
 ------
 
