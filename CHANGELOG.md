@@ -1,8 +1,8 @@
 Changelog for incuna-test-utils
 ============================
 
-v6.5.0 (upcoming)
------------------
+v6.5.0
+------
 
 * Add `get_all_field_names` to compensate for deprecation of `Model._meta` functions in Django 1.10
 
