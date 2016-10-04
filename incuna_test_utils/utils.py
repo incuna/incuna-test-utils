@@ -45,6 +45,9 @@ def get_all_field_names(model):
     try:
         fields = model._meta.get_all_field_names()
     except AttributeError:
+        # Magic method from:
+        # https://docs.djangoproject.com/en/1.10/ref/
+        # models/meta/#migrating-from-the-old-api
         fields = list(set(chain.from_iterable(
             (field.name, field.attname) if hasattr(field, 'attname') else (field.name,)
             for field in model._meta.get_fields()
