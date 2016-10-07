@@ -1,6 +1,11 @@
 Changelog for incuna-test-utils
 ============================
 
+v6.6.0 (Upcoming)
+------
+
+* Exclude `tests` app from distributed package.
+
 v6.5.1
 ------
 
