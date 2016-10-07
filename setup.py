@@ -13,7 +13,7 @@ extras_require = {
 
 setup(
     name='incuna-test-utils',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests']),
     include_package_data=True,
     version=version,
     description='Custom TestCases and other test helpers for Django apps',
