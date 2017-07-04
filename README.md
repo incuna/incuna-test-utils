@@ -144,11 +144,7 @@ This factory can be used to create instances of
 `compat` provides a few miscelleaneous helpers useful for testing cross-version
 code:
 
-  * `DJANGO_LT_15`, `DJANGO_LT_16`, `DJANGO_LT_17` each return `True` if
-`django.VERSION` is less than `1.5`, `1.6` or `1.7` respectively.
-  * `wipe_id_fieldson_django_lt_17` removes any field name ending in `_id` from
-a collection if the django version is less than `1.7`. This is useful for testing
-a model has the fields expected.
+  * `DJANGO_LT_19` is `True` if `django.VERSION` is less than `1.9`.
   * `Python2AssertMixin` aliases python 2.7 assert methods to match the python 3 api.
     * `TestCase.assertItemsEqual` is aliased as `assertCountEqual`
     * `TestCase.assertRegexpMatches` is aliased as `assertRegex`
