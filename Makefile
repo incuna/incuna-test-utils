@@ -8,7 +8,7 @@ release:
 	python setup.py register sdist bdist_wheel upload
 
 test:
-	@py.test incuna_test_utils tests
+	@py.test -Wmodule incuna_test_utils tests
 	@flake8 .
 
 install:
