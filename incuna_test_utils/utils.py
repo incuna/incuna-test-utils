@@ -1,5 +1,4 @@
 from contextlib import contextmanager
-from itertools import chain
 try:
     from unittest.mock import patch
 except ImportError:
@@ -33,39 +32,4 @@ def isolate_method(cls, mixin, method_name, parent_return_value=None):
 
 def field_names(model):
     """Return a set of all field names for a model."""
-    try:
-        fields = model._meta.get_fields()
-    except AttributeError:
-        return set(model._meta.get_all_field_names())
-    return {field.name for field in fields}
-
-
-def get_all_field_names(model):
-    """Return a list of all field names for a model"""
-    try:
-        fields = model._meta.get_all_field_names()
-    except AttributeError:
-        # Magic method from:
-        # https://docs.djangoproject.com/en/1.10/ref/
-        # models/meta/#migrating-from-the-old-api
-        fields = list(set(chain.from_iterable(
-            (field.name, field.attname) if hasattr(field, 'attname') else (field.name,)
-            for field in model._meta.get_fields()
-            if not (field.many_to_one and field.related_model is None)
-        )))
-    return fields
-
-
-def get_field_by_name(model, field_name):
-    """Returns a tuple of (field, model, direct, m2m)"""
-    try:
-        field_info = model._meta.get_field_by_name(field_name)
-    except AttributeError:
-        field = model._meta.get_field(field_name)
-        field_info = (
-            field,
-            field.model,
-            not field.auto_created or field.concrete,
-            field.many_to_many,
-        )
-    return field_info
+    return {field.name for field in model._meta.get_fields()}
