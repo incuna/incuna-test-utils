@@ -126,3 +126,16 @@ class TestDummyStorage:
         message_storage.store = [message]
 
         assert message in iter(message_storage)
+
+    def test_sequence_length(self):
+        message_storage = DummyStorage()
+        message_storage.store = ["A message!"]
+
+        assert len(message_storage) == 1
+
+    def test_sequence_indexing(self):
+        message_storage = DummyStorage()
+        message = "A message!"
+        message_storage.store = [message]
+
+        assert message_storage[0] == message
