@@ -1,0 +1,16 @@
+[[source]]
+verify_ssl = true
+url = "https://pypi.python.org/simple"
+
+[packages]
+django = "~=1.8.0"
+pytest = "*"
+djangorestframework = "~=3.6.0"
+pytest-django = "*"
+dj-database-url = "*"
+feincms = "*"
+"psycopg2" = "*"
+django-mptt = "*"
+factory-boy = "~=2.8.1"
+pillow = "*"
+mock = "*"
