@@ -23,3 +23,11 @@ PASSWORD_HASHERS = ['django.contrib.auth.hashers.MD5PasswordHasher']
 ROOT_URLCONF = 'tests.urls'
 SECRET_KEY = 'test'
 FEINCMS_USE_PAGE_ADMIN = False
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {},
+    },
+]
