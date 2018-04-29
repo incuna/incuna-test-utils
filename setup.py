@@ -5,9 +5,7 @@ version = '6.6.0'
 
 
 extras_require = {
-    'images': [
-        'Pillow>=2.8.1,<2.9',
-    ],
+    'images': ['Pillow'],
 }
 
 
