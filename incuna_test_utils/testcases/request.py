@@ -6,14 +6,16 @@ from django.test import RequestFactory, TestCase
 
 class DummyStorage:
     def __init__(self):
-        self.store = list()
+        self.store = []
 
     def add(self, level, message, extra_tags=''):
         self.store.append(message)
 
-    def __iter__(self):
-        for item in self.store:
-            yield item
+    def __len__(self):
+        return len(self.store)
+
+    def __getitem__(self, index):
+        return self.store[index]
 
 
 class BaseRequestTestCase(TestCase):
