@@ -9,7 +9,7 @@ env:
   global:
     - DATABASE_URL='postgres://postgres@localhost/test_utils'
   matrix:
-    - DJANGO='django~=1.11.0' DRF='djangorestframework~=3.6.0'
+    - DJANGO='django~=1.11.0' DRF='djangorestframework~=3.9.1'
     - DJANGO='django~=1.8.0' DRF='djangorestframework~=3.6.0'
 install:
   - psql -c 'CREATE DATABASE test_utils' -U postgres;
