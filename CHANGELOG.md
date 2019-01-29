@@ -1,6 +1,14 @@
 Changelog for incuna-test-utils
 ============================
 
+v7.0.0
+------
+
+* Drop support for Django < 1.8
+* Add support for Django 1.11.
+* Remove `utils.get_all_field_names` and `utils.get_field_by_name` helper methods. See https://docs.djangoproject.com/en/1.10/ref/models/meta/#migrating-from-the-old-api for replacements for these methods.
+* Update `DummyStorage` to support the `Sequence` protocol instead of the `Iterator` protocol.
+
 v6.6.0
 ------
 
