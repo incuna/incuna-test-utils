@@ -1,6 +1,6 @@
 from incuna_test_utils import utils
 
-from .models import ManyRelated, User
+from .models import User
 
 
 class Parent(object):
@@ -45,26 +45,3 @@ def test_isolate_method():
 def test_field_names():
     fields = utils.field_names(User)
     assert fields == {'id', 'email', 'name'}
-
-
-def test_get_all_field_names():
-    fields = utils.get_all_field_names(User)
-    assert isinstance(fields, list)
-    # Convert to set as list could complain about ordering in equality check
-    assert set(fields) == {'id', 'email', 'name'}
-
-
-def test_get_field_by_name():
-    field, model, direct, m2m = utils.get_field_by_name(User, 'email')
-    assert field == User._meta.get_field('email')
-    assert not model
-    assert direct
-    assert not m2m
-
-
-def test_get_field_by_name_many_related():
-    field, model, direct, m2m = utils.get_field_by_name(ManyRelated, 'relation')
-    assert field == ManyRelated._meta.get_field('relation')
-    assert not model
-    assert direct
-    assert m2m
