@@ -16,6 +16,7 @@ setup(
     version=version,
     description='Custom TestCases and other test helpers for Django apps',
     long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     author='Incuna',
     author_email='admin@incuna.com',
     url='https://github.com/incuna/incuna-test-utils/',

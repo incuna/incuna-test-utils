@@ -5,7 +5,8 @@ help:
 	@echo "    make release    | Release to pypi."
 
 release:
-	python setup.py register sdist bdist_wheel upload
+	python setup.py register sdist bdist_wheel
+	twine upload dist/*
 
 test:
 	@py.test -Wmodule incuna_test_utils tests
