@@ -1,7 +1,7 @@
 import inspect
 
-from django.core.urlresolvers import resolve, reverse
 from django.test import TestCase
+from django.urls import resolve, reverse
 
 
 class URLTestMixin(object):

@@ -1,6 +1,12 @@
 Changelog for incuna-test-utils
 ============================
 
+UPCOMING
+------
+
+* Drop support for Django < 1.10
+* Add support for Django 2.0
+
 v7.0.0
 ------
 
