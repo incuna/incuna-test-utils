@@ -1,5 +1,4 @@
 -e .[images]
-django~=2.0.13
 djangorestframework~=3.11.0
 django-mptt==0.9.0
 dj-database-url==0.4.1
