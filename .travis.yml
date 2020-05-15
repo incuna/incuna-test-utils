@@ -16,8 +16,13 @@ matrix:
   exclude:
     - env: DJANGO='django~=2.0.0'
       python: 2.7
-install:
+services:
+  - postgresql
+addons:
+  postgresql: "9.4"
+before_script:
   - psql -c 'CREATE DATABASE test_utils' -U postgres;
+install:
   - pip install -r requirements.txt
   - pip install --upgrade $DJANGO
   - pip install --upgrade $DRF
