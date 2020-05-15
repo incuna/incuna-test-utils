@@ -14,7 +14,7 @@ env:
     - DJANGO='django~=1.10.0' DRF='djangorestframework~=3.6.0'
 matrix:
   exclude:
-    - env: DJANGO='django~=2.0.0'
+    - env: DJANGO='django~=2.0.0' DRF='djangorestframework~=3.11.0'
       python: 2.7
 services:
   - postgresql
