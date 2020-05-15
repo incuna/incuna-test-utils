@@ -15,11 +15,11 @@ class APIRequestTestCase(BaseAPIRequestTestCase):
 
     def test_create_request_auth(self):
         request = self.create_request()
-        assert request.user.is_authenticated()
+        assert request.user.is_authenticated
 
     def test_create_request_no_auth(self):
         request = self.create_request(auth=False)
-        assert not request.user.is_authenticated()
+        assert not request.user.is_authenticated
 
 
 class APIExampleTestCase(BaseAPIExampleTestCase):

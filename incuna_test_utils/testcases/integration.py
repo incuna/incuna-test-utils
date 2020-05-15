@@ -1,6 +1,6 @@
-from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.test import TestCase
+from django.urls import reverse
 
 from .request import BaseRequestTestCase
 
